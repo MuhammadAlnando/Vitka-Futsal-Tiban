@@ -7,7 +7,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1><?php echo $title ?></h1>
-        
+       
       </section>
       <!-- Main content -->
       <section class="content">
@@ -25,7 +25,9 @@
 									<div class="form-group"><label>Nama Slider</label>
 										<?php echo form_input($nama_slider);?>
 									</div>
-								
+									<div class="form-group"><label>Link</label>
+										<?php echo form_input($link);?>
+									</div>
 									<div class="form-group"><label>Gambar</label>
 										<input type="file" class="form-control" name="foto" id="foto" onchange="tampilkanPreview(this,'preview')"/>
 										<br><p><b>Preview Gambar</b><br>

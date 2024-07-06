@@ -50,14 +50,18 @@ class Pesan_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_all()
+    {
+        return $this->db->get('pesan')->result_array();
+    }
+
     /**
      * Hapus pesan berdasarkan ID.
      * 
      * @param int $id ID dari pesan yang akan dihapus
      */
     public function delete_pesan($id) {
-        $this->db->where('id', $id);
-        $this->db->delete('pesan');
+        $this->db->delete('pesan', array('id' => $id));
     }
 
     // Fungsi tambahan bisa ditambahkan sesuai kebutuhan

@@ -512,3 +512,8 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['upload_path'] = './assets/images/pesan/';
+$config['allowed_types'] = 'gif|jpg|jpeg|png'; // Tipe file yang diizinkan untuk diupload
+$config['max_size'] = 2048; // Ukuran maksimal file dalam kilobyte (KB)
+$config['encrypt_name'] = TRUE; // Mengenkripsi nama file saat diupload

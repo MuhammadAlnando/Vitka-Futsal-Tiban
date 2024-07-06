@@ -5,7 +5,7 @@
 		<div class="row">
 	    
 
-	    <div class="col-lg-12"><h1>DETAIL RIWAYAT TRANSAKSI</h1><hr>
+	    <div class="col-lg-12"><h2>DETAIL RIWAYAT TRANSAKSI</h2><hr>
         <h4>Invoice NO. <?php echo $history_detail_row->id_invoice ?>
 					<?php if($history_detail_row->status == '1'){ ?>
 		        <font color='red'>(BELUM LUNAS)</font>

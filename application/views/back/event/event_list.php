@@ -26,10 +26,7 @@
                         <th style="text-align: center">No.</th>
                         <th style="text-align: center">Nama <?php echo $module ?></th>
                         <th style="text-align: center">Kategori</th>
-                        <th style="text-align: center">Uploader</th>
-                        <th style="text-align: center">Upload</th>
-                        <th style="text-align: center">Updater</th>
-                        <th style="text-align: center">Update</th>
+                        
                         <th style="text-align: center">Aksi</th>
                       </tr>
 										</thead>
@@ -39,10 +36,7 @@
                           <td style="text-align: center"><?php echo $no++ ?></td>
                           <td style="text-align: center"><?php echo $data->nama_event ?></td>
                           <td style="text-align: center"><?php echo $data->nama_kategori ?></td>
-                          <td style="text-align: center"><?php echo $data->created_by ?></td>
-                          <td style="text-align: center"><?php echo $data->created_at ?></td>
-                          <td style="text-align: center"><?php echo $data->modified_by ?></td>
-                          <td style="text-align: center"><?php echo $data->modified_at ?></td>
+              
                           <td style="text-align: center">
                             <?php
                             echo anchor(site_url('admin/event/update/'.$data->id_event),'<i class="fa fa-pencil"></i>','title="Edit", class="btn btn-sm btn-warning"'); echo ' ';

@@ -7,7 +7,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1><?php echo $title ?></h1>
-        
+       
       </section>
       <!-- Main content -->
       <section class="content">
@@ -16,6 +16,7 @@
           <div class="col-lg-12">
 						<div class="box box-primary">
               <div class="box-body">
+								<a href="<?php echo base_url('admin/slider/create') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
 								<hr>
 								<?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                 <div class="table-responsive no-padding">
@@ -25,7 +26,6 @@
 												<th style="text-align: center">No. Urut</th>
 												<th style="text-align: center">Nama <?php echo $module ?></th>
 												<th style="text-align: center">Img</th>
-                    
 												<th style="text-align: center">Aksi</th>
 											</tr>
 										</thead>
@@ -39,6 +39,7 @@
                           <td style="text-align: center">
                             <?php
                             echo anchor(site_url('admin/slider/update/'.$data->id_slider),'<i class="fa fa-pencil"></i>','title="Edit", class="btn btn-sm btn-warning"'); echo ' ';
+                            echo anchor(site_url('admin/slider/delete/'.$data->id_slider),'<i class="fa fa-remove"></i>','title="Hapus", class="btn btn-sm btn-danger", onclick="javasciprt: return confirm(\'Apakah Anda yakin ?\')"');
                             ?>
                           </td>
                         </tr>

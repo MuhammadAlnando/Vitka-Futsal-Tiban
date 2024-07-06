@@ -1,9 +1,11 @@
 <section class="content">
   <!-- penampilan total record -->
   <div class="row">
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
       <div class='small-box bg-teal'>
         <div class='inner'><h3> Rp <?php echo number_format($omset_harian) ?> </h3><p><b>OMSET HARI INI</b></p></div>
+        <div class='inner'><h3> Rp <?php echo number_format($omset_bulanan) ?> </h3><p><b>OMSET BULAN INI</b></p></div>
+        <div class='inner'><h3> Rp <?php echo number_format($omset_tahunan) ?> </h3><p><b>OMSET TAHUN INI</b></p></div>
         <div class='icon'><span>&#x1F4B5;</span></div>
         <a href='<?php echo base_url('admin/transaksi') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
       </div>
@@ -22,32 +24,11 @@
         <a href='<?php echo base_url('admin/lapangan') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
       </div>
     </div>
-    <div class='col-lg-6'>
-      <div class='small-box bg-teal'>
-        <div class='inner'><h3> Rp <?php echo number_format($omset_bulanan) ?> </h3><p><b>OMSET BULAN INI</b></p></div>
-        <div class='icon'><span>&#x1F4B5;</span></div>
-        <a href='<?php echo base_url('admin/transaksi') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
-      </div>
-    </div>
     <div class='col-lg-3'>
       <div class='small-box bg-aqua'>
         <div class='inner'><h3> <?php echo $total_kategori ?> </h3><p><b>KATEGORI</b></p></div>
         <div class='icon'><span>&#x1F4F0;</span></div>
         <a href='<?php echo base_url('admin/kategori') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
-      </div>
-    </div>
-    <div class='col-lg-3'>
-      <div class='small-box bg-purple'>
-        <div class='inner'><h3> <?php echo $total_kontak ?> </h3><p><b>KONTAK</b></p></div>
-        <div class='icon'><span>&#x260E;</span></div>
-        <a href='<?php echo base_url('admin/kontak') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
-      </div>
-    </div>
-    <div class='col-lg-6'>
-      <div class='small-box bg-teal'>
-        <div class='inner'><h3> Rp <?php echo number_format($omset_tahunan) ?> </h3><p><b>OMSET TAHUN INI</b></p></div>
-        <div class='icon'><span>&#x1F4B5;</span></div>
-        <a href='<?php echo base_url('admin/transaksi') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
       </div>
     </div>
 
@@ -56,13 +37,6 @@
         <div class='inner'><h3> <?php echo $total_slider ?> </h3><p><b>SLIDER</b></p></div>
         <div class='icon'><span>&#x1F4B3;</span></div>
         <a href='<?php echo base_url('admin/slider') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
-      </div>
-    </div>
-    <div class='col-lg-3'>
-      <div class='small-box bg-teal'>
-        <div class='inner'><h3> <?php echo $total_customer ?> </h3><p><b>CUSTOMER</b></p></div>
-        <div class='icon'><span>&#x1F464;</span></div>
-        <a href='<?php echo base_url('admin/auth') ?>' class='small-box-footer'>Selengkapnya <span>&#x27A1;</span></a>
       </div>
     </div>
   </div>

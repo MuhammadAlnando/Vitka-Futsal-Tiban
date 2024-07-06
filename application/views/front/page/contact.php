@@ -17,25 +17,28 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="controls">
-                        <select class="form-control" id="subjek" name="subjek">
-                            <option value="Konfirmasi Pemesanan">Konfirmasi Pemesanan</option>
-                            <option value="Masukan">Masukan</option>
-                            <option value="Pengaduan">Pengaduan</option>
-                            <option value="Lainnya">Lainnya</option>
-                        </select>
-                    </div>
-                </div>
+    <div class="controls">
+        <select class="form-control" id="subjek" name="subjek">
+            <option value="" disabled selected>Pilih kategori Anda</option>
+            <option value="Konfirmasi Pemesanan">Konfirmasi Pemesanan</option>
+            <option value="Masukan">Masukan</option>
+            <option value="Pengaduan">Pengaduan</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+    </div>
+</div>
+
                 <div class="form-group">
                     <div class="controls">
                         <textarea class="form-control" id="pesan" name="pesan" rows="5" placeholder="Isi Pesan"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="userfile">Upload Gambar</label>
-                    <input type="file" name="userfile" id="userfile" size="20" onchange="previewImage(event)" accept="image/*" />
-                    <br>
-                    <img id="preview" src="#" alt="Preview Gambar" style="max-width: 40%; display: none;" />
+                    <label class="col-md-12">Lampiran</label>
+                    <div class="col-md-12">
+                        <input type="file" name="userfile" class="form-control">
+                        <div class="text-danger"><?= form_error('userfile'); ?></div>
+                    </div>
                 </div>
                 <button type="button" id="submit" class="btn btn-sm btn-primary" style="pointer-events: all; cursor: pointer;">Kirim</button>
             </form>
@@ -48,15 +51,12 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function() {
-    // Ambil informasi nama pengguna dari session atau data pengguna terautentikasi
-    var name = '<?php echo $this->session->userdata("name"); ?>'; // Sesuaikan dengan nama key yang sesuai dengan data pengguna
-
-    // Set nilai otomatis untuk input nama_pengirim
+    var name = '<?php echo $this->session->userdata("name"); ?>';
     $('#nama_pengirim').val(name);
 
     $('#submit').click(function() {
         var formData = new FormData($('#contactForm')[0]);
-        
+
         $.ajax({
             url: '<?php echo base_url('admin/pesan/save'); ?>',
             type: 'POST',
@@ -74,17 +74,15 @@ $(document).ready(function() {
                         timer: 1500
                     });
                     $('#contactForm')[0].reset();
-                    $('#preview').attr('src', '#').css('display', 'none');
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Gagal mengirim pesan. Silakan coba lagi.',
+                        text: response.message,
                     });
                 }
             },
             error: function(xhr, status, error) {
-                console.error("Terjadi kesalahan:", error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -94,14 +92,4 @@ $(document).ready(function() {
         });
     });
 });
-
-function previewImage(event) {
-    var reader = new FileReader();
-    reader.onload = function() {
-        var preview = document.getElementById('preview');
-        preview.src = reader.result;
-        preview.style.display = 'block';
-    }
-    reader.readAsDataURL(event.target.files[0]);
-}
 </script>

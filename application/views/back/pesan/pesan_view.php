@@ -33,6 +33,18 @@
                                     <th>Tanggal:</th>
                                     <td><?php echo isset($pesan_detail['tanggal']) ? date('d-m-Y H:i:s', strtotime($pesan_detail['tanggal'])) : ''; ?></td>
                                 </tr>
+                                <tr>
+                                    <th>Lampiran:</th>
+                                    <td>
+                                        <?php if (!empty($pesan_detail['lampiran'])): ?>
+                                            <a href="<?php echo base_url('assets/images/pesan/'.$pesan_detail['lampiran']); ?>" target="_blank">
+                                                <img src="<?php echo base_url('assets/images/pesan/'.$pesan_detail['lampiran']); ?>" alt="lampiran" style="max-width: 200px;">
+                                            </a>
+                                        <?php else: ?>
+                                            Tidak ada lampiran.
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

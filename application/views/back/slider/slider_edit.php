@@ -25,7 +25,9 @@
 									<div class="form-group"><label>Nama</label>
 										<?php echo form_input($nama_slider, $slider->nama_slider);?>
 									</div>
-									
+									<div class="form-group"><label>Link</label>
+										<?php echo form_input($link, $slider->link);?>
+									</div>
 									<div class="form-group"><label>Gambar Sebelumnya</label><br>
 										<img src="<?php echo base_url('assets/images/slider/'.$slider->foto.$slider->foto_type.'') ?>" width="200px"/>
 									</div>

@@ -95,8 +95,8 @@ class Page extends CI_Controller {
 				// setingan default tanpa smtp
 				$this->load->library('email');
 
-				$this->email->from('mail@azmicolejr.com', 'Pesan Baru dari Website');
-				$this->email->to('azmi2793@gmail.com');
+				$this->email->from('muhammadalnando40@gmail.com', 'Pesan Baru dari Website');
+				$this->email->to('muhammadalnando40@gmail.com');
 				$this->email->subject($subject);
 				$this->email->message($message);
 

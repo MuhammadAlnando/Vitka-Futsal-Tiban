@@ -37,19 +37,25 @@
             <li <?php if($this->uri->segment(2) == "slider"){echo "class='active'";} ?>>
                 <a href='<?php echo base_url('admin/slider') ?>'><span>&#x1F4F1;</span> Slider </a>
             </li>
-            <li <?php if($this->uri->segment(2) == "bank"){echo "class='active'";} ?>>
+            <?php if ($this->ion_auth->is_superadmin()): ?>
+            <li <?php if($this->uri->segment(2) == "bank" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
                 <a href='<?php echo base_url('admin/bank') ?>'><span>&#x1F4B3;</span> Bank </a>
             </li>
-            <li <?php if($this->uri->segment(2) == "kontak"){echo "class='active'";} ?>>
+            <?php endif ?>
+            <?php if ($this->ion_auth->is_superadmin()): ?>
+            <li <?php if($this->uri->segment(2) == "kontak" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
                 <a href='<?php echo base_url('admin/kontak') ?>'><span>&#x260E;</span> Kontak </a>
             </li>
+            <?php endif ?>
             <li <?php if($this->uri->segment(2) == "pesan"){echo "class='active'";} ?>>
     <a href='<?php echo base_url('admin/pesan') ?>'><span>&#x1F4E7;</span> Pesan </a>
 </li>
 
             <!-- Akhir menu Pesan -->
             <li class="header"><font style="font-size: 16px;color: white; font-weight: bold">PENGATURAN</font></li>
-            <li <?php if($this->uri->segment(2) == "company"){echo "class='active'";} ?>><a href='<?php echo base_url() ?>admin/company/update/1'> <span>&#x1F3E2;</span> <span>Profil Perusahaan</span> </a> </li>
+            <?php if ($this->ion_auth->is_superadmin()): ?>
+            <li <?php if($this->uri->segment(2) == "company" && $this->uri->segment(3) == ""){echo "class='active'";} ?>><a href='<?php echo base_url() ?>admin/company/update/1'> <span>&#x1F3E2;</span> <span>Profil Perusahaan</span> </a> </li>
+            <?php endif ?>
             <?php if ($this->ion_auth->is_superadmin()): ?>
                 <li <?php if($this->uri->segment(2) == "auth" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
                     <a href='<?php echo base_url() ?>admin/auth/'><span>&#x1F464;</span> Data User</a>

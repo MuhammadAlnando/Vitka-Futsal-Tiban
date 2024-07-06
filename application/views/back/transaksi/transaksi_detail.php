@@ -69,18 +69,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php $no=1; foreach ($cart_finished as $cart){ ?>
-                  <tr>
-                    <td style="text-align:center"><?php echo $no++ ?></td>
-                    <td style="text-align:left"><?php echo $cart->nama_lapangan ?></td>
-                    <td style="text-align:center"><?php echo number_format($cart->harga_jual) ?></td>
-                    <td style="text-align:center"><?php echo $cart->tanggal ?></td>
-                    <td style="text-align:center"><?php echo $cart->jam_mulai ?></td>
-                    <td style="text-align:center"><?php echo $cart->durasi ?></td>
-                    <td style="text-align:center"><?php echo $cart->jam_selesai ?></td>
-                    <td style="text-align:right"><?php echo number_format($cart->subtotal) ?></td>
-                  </tr>
-                <?php } ?>
+                <?php $no = 1; foreach ($cart_finished as $cart): ?>
+<tr>
+    <td style="text-align:center"><?php echo $no++ ?></td>
+    <td style="text-align:left"><?php echo $cart->nama_lapangan ?></td>
+    <td style="text-align:center"><?php echo number_format($cart->harga_jual) ?></td>
+    <td style="text-align:center"><?php echo $cart->tanggal ?></td>
+    <td style="text-align:center"><?php echo $cart->jam_mulai ?></td>
+    <td style="text-align:center"><?php echo $cart->durasi ?></td>
+    <td style="text-align:center"><?php echo $cart->jam_selesai ?></td>
+    <td style="text-align:right"><?php echo number_format($cart->subtotal) ?></td>
+</tr>
+<?php endforeach; ?>
+
+
                 </tbody>
               </table>
             </div>
