@@ -349,7 +349,7 @@ class Cart extends CI_Controller
 	public function upload_bukti($id_trans) {
 		// Konfigurasi upload file
 		$config['upload_path']   = './assets/images/transaksi/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpeg|jpg|png';
 		$config['max_size']      = 2048; // Ukuran maksimum file (2MB)
 		$config['overwrite']     = TRUE; // Timpa file jika sudah ada dengan nama yang sama
 	
