@@ -36,10 +36,7 @@
                     <?php echo $company->company_fax ?>
                 </p>
             <?php endif; ?>
-            
-            <div class="text-center mt-4">
-                <a href="<?php echo base_url('contact'); ?>" class="btn btn-primary" style="width: 100%; background-color: #223C95; border: none;">Hubungi Kami</a>
-            </div>
+           
         </div>
     </div>
 </div>

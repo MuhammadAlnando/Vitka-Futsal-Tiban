@@ -16,8 +16,8 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="subjek" name="subjek">
-                        <option value="" disabled selected>Pilih kategori Anda</option>
-                        <option value="Konfirmasi Pemesanan">Konfirmasi Pemesanan</option>
+                        <option value="" disabled selected>Isi Subjek</option>
+                        <option value="Konfirmasi Pemesanan">Acara/Event</option>
                         <option value="Masukan">Masukan</option>
                         <option value="Pengaduan">Pengaduan</option>
                         <option value="Lainnya">Lainnya</option>
