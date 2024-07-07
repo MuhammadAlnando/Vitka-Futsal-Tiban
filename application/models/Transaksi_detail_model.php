@@ -19,4 +19,18 @@ class Transaksi_detail_model extends CI_Model{
 		//
 		// return $query->result();
 	}
+
+	public function update_transaksi($id_trans, $data) {
+        $this->db->where('id_trans', $id_trans);
+        $this->db->update('transaksi', $data);
+    }
+
+	public function get_all_transaksi() {
+        $this->db->select('transaksi.id_trans, transaksi.id_invoice, users.name, transaksi.created_date, transaksi.grand_total, transaksi.status, transaksi.bukti_pembayaran');
+        $this->db->from('transaksi');
+        $this->db->join('users', 'transaksi.user_id = users.id', 'left');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

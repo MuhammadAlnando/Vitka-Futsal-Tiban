@@ -10,13 +10,7 @@
 			<?php echo form_open('cart/download_invoice/'.$cart_finished_row->id_trans, array("target"=>"_blank")) ?>
 				<button type="submit" name="download_invoice" class="btn btn-sm btn-success">Download Invoice</button>
 			<?php echo form_close() ?>
-			<br><?php echo form_open_multipart('transaksi/upload_bukti_pembayaran/'.$cart_finished_row->id_trans); ?>
-  <div class="form-group">
-    <label for="bukti_pembayaran">Upload Bukti Pembayaran:</label>
-    <input type="file" name="bukti_pembayaran" class="form-control-file" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Upload</button>
-<?php echo form_close(); ?>
+			<br>
 
 			<div class="row">
 			  <div class="col-lg-12">
@@ -107,6 +101,16 @@
 						</tbody>
 					</table>
 				</div>
+				<form id="contactForm" enctype="multipart/form-data">
+    <input type="hidden" name="id_trans" value="<?php echo $cart_finished_row->id_trans; ?>">
+    <div class="form-group">
+        <label>Upload Bukti Pembayaran</label>
+        <input type="file" name="userfile" class="form-control">
+        <div class="text-danger"><?= form_error('userfile'); ?></div>
+    </div>
+    <button type="button" id="submit" class="btn btn-sm btn-primary">Kirim</button>
+</form>
+<div id="notification"></div>
 			</div>
 
 			<div class="row">
@@ -125,3 +129,35 @@
 </div>
 
 <?php $this->load->view('front/footer'); ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#submit').on('click', function(e) {
+        e.preventDefault();
+        
+        var formData = new FormData($('#contactForm')[0]);
+
+        $.ajax({
+            url: '<?php echo base_url("admin/transaksi/upload_bukti_pembayaran"); ?>',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log('Success:', response);
+                var res = JSON.parse(response);
+                if (res.status === 'success') {
+                    $('#notification').html('<div class="alert alert-success">' + res.message + '</div>');
+                } else {
+                    $('#notification').html('<div class="alert alert-danger">' + res.message + '</div>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', error);
+                $('#notification').html('<div class="alert alert-danger">Gagal mengupload bukti pembayaran.</div>');
+            }
+        });
+    });
+});
+</script>

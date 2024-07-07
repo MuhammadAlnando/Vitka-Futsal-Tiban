@@ -1,4 +1,4 @@
-<hr><h3 align="center"><b>EVENT TERBARU</b></h3><hr>
+<hr><h3 align="center"><b>ACARA TERBARU</b></h3><hr>
 <div class="container">
   <div class="row">
     <?php foreach($event_new as $event){ ?>

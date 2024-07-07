@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>SEMUA EVENT</h2>
+            <h2>SEMUA ACARA</h2>
             <hr>
             <div class="row">
                 <?php foreach($event_all as $event): ?>

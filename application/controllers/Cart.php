@@ -345,4 +345,37 @@ class Cart extends CI_Controller
 
 		echo json_encode($result);
 	}
+
+	public function upload_bukti($id_trans) {
+		// Konfigurasi upload file
+		$config['upload_path']   = './assets/images/transaksi/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']      = 2048; // Ukuran maksimum file (2MB)
+		$config['overwrite']     = TRUE; // Timpa file jika sudah ada dengan nama yang sama
+	
+		$this->load->library('upload', $config);
+	
+		if (!$this->upload->do_upload('bukti_pembayaran')) {
+			// Jika gagal upload
+			$error = array('error' => $this->upload->display_errors());
+			// Tampilkan pesan error jika diperlukan
+			$this->session->set_flashdata('message', $error['error']);
+		} else {
+			// Jika berhasil upload
+			$upload_data = $this->upload->data();
+			// Simpan nama file ke dalam database atau sesuai kebutuhan Anda
+			$data = array(
+				'bukti_pembayaran' => $upload_data['file_name']
+			);
+			$this->db->where('id_trans', $id_trans);
+			$this->db->update('transaksi', $data);
+			
+			// Tampilkan pesan sukses jika diperlukan
+			$this->session->set_flashdata('message', 'Bukti pembayaran berhasil diupload.');
+		}
+	
+		// Redirect kembali ke halaman riwayat transaksi
+		redirect('cart/history');
+	}
+	
 }

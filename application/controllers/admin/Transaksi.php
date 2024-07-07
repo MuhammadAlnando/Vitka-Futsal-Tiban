@@ -8,6 +8,8 @@ class Transaksi extends CI_Controller
     $this->load->helper('tgl_indo');
     $this->load->model('Cart_model');
     $this->load->model('Company_model');
+    $this->load->model('Transaksi_detail_model');
+        $this->load->library('upload');
 
     $this->data['module']         = 'Transaksi';
     $this->data['button_submit']  = 'Simpan';
@@ -20,11 +22,49 @@ class Transaksi extends CI_Controller
   }
 
   public function index()
-  {
-    $this->data['title']    = 'Data '.$this->data['module'];
-    $this->data['get_all']  = $this->Cart_model->get_all();
+{
+    $data['title'] = 'Daftar Transaksi';
+    $data['get_all'] = $this->Transaksi_detail_model->get_all_transaksi();
+    
+    $this->load->view('back/transaksi/transaksi_list', $data);
+}
 
-    $this->load->view('back/transaksi/transaksi_list',$this->data);
+
+  public function upload_bukti_pembayaran() {
+    $config['upload_path'] = './assets/images/transaksi/';
+    $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+    $config['max_size'] = 2048; // 2MB
+    $config['encrypt_name'] = TRUE;
+
+    $this->upload->initialize($config);
+
+    if (!$this->upload->do_upload('userfile')) {
+        $error = $this->upload->display_errors();
+        log_message('error', 'Upload error: ' . $error);
+        $response = array(
+            'status' => 'error',
+            'message' => $error
+        );
+    } else {
+        $upload_data = $this->upload->data();
+        $file_name = $upload_data['file_name'];
+
+        $id_trans = $this->input->post('id_trans'); // Get the transaction ID from POST data
+
+        $data = array(
+            'bukti_pembayaran' => $file_name,
+            'status' => '1' // Set status to 'menunggu konfirmasi'
+        );
+    
+        $this->Transaksi_detail_model->update_transaksi($id_trans, $data);
+    
+        $response = array(
+            'status' => 'success',
+            'message' => 'Bukti pembayaran berhasil diupload.'
+        );
+    
+        echo json_encode($response);
+    }
   }
 
   public function create()
