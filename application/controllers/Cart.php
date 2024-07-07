@@ -347,35 +347,60 @@ class Cart extends CI_Controller
 	}
 
 	public function upload_bukti($id_trans) {
-		// Konfigurasi upload file
-		$config['upload_path']   = './assets/images/transaksi/';
-		$config['allowed_types'] = 'gif|jpeg|jpg|png';
-		$config['max_size']      = 2048; // Ukuran maksimum file (2MB)
-		$config['overwrite']     = TRUE; // Timpa file jika sudah ada dengan nama yang sama
+        // Konfigurasi upload file
+        $config['upload_path']   = './assets/images/transaksi/';
+        $config['allowed_types'] = 'gif|jpeg|jpg|png|pdf';
+        $config['max_size']      = 2048; // Ukuran maksimum file (2MB)
+        $config['overwrite']     = TRUE; // Timpa file jika sudah ada dengan nama yang sama
+    
+        $this->load->library('upload', $config);
+    
+        if (!$this->upload->do_upload('bukti_pembayaran')) {
+            // Jika gagal upload
+            $error = array('error' => $this->upload->display_errors());
+            // Tampilkan pesan error jika diperlukan
+            $this->session->set_flashdata('message', $error['error']);
+            $this->session->set_flashdata('message_type', 'error');
+        } else {
+            // Jika berhasil upload
+            $upload_data = $this->upload->data();
+            // Simpan nama file ke dalam database atau sesuai kebutuhan Anda
+            $data = array(
+                'bukti_pembayaran' => $upload_data['file_name'],
+                'status' => 5 // Update status menjadi "menunggu konfirmasi"
+            );
+            $this->db->where('id_trans', $id_trans);
+            $this->db->update('transaksi', $data);
+            
+            // Tampilkan pesan sukses jika diperlukan
+            $this->session->set_flashdata('message', 'Bukti pembayaran berhasil diupload, menunggu konfirmasi.');
+            $this->session->set_flashdata('message_type', 'success');
+        }
+    
+        // Redirect kembali ke halaman riwayat transaksi
+        redirect('cart/history');
+    }
+
+	// Method untuk membatalkan transaksi
+	public function cancel($id_trans) {
+        $transaction = $this->Transaksi_detail_model->get_transaction($id_trans);
+
+        if ($transaction->status == '2' || $transaction->status == '5') {
+            $this->session->set_flashdata('message', 'Transaksi yang sudah lunas atau menunggu konfirmasi tidak bisa dibatalkan');
+            $this->session->set_flashdata('message_type', 'error');
+            redirect('cart/history');
+        } else {
+            $result = $this->Transaksi_detail_model->cancel_transaction($id_trans);
+            if ($result) {
+                $this->session->set_flashdata('message', 'Transaksi berhasil dibatalkan');
+                $this->session->set_flashdata('message_type', 'success');
+            } else {
+                $this->session->set_flashdata('message', 'Transaksi gagal dibatalkan');
+                $this->session->set_flashdata('message_type', 'error');
+            }
+            redirect('cart/history');
+        }
+    }
 	
-		$this->load->library('upload', $config);
-	
-		if (!$this->upload->do_upload('bukti_pembayaran')) {
-			// Jika gagal upload
-			$error = array('error' => $this->upload->display_errors());
-			// Tampilkan pesan error jika diperlukan
-			$this->session->set_flashdata('message', $error['error']);
-		} else {
-			// Jika berhasil upload
-			$upload_data = $this->upload->data();
-			// Simpan nama file ke dalam database atau sesuai kebutuhan Anda
-			$data = array(
-				'bukti_pembayaran' => $upload_data['file_name']
-			);
-			$this->db->where('id_trans', $id_trans);
-			$this->db->update('transaksi', $data);
-			
-			// Tampilkan pesan sukses jika diperlukan
-			$this->session->set_flashdata('message', 'Bukti pembayaran berhasil diupload.');
-		}
-	
-		// Redirect kembali ke halaman riwayat transaksi
-		redirect('cart/history');
-	}
 	
 }

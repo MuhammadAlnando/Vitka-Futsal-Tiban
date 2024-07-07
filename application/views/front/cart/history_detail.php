@@ -11,6 +11,8 @@
 		        <font color='red'>(BELUM LUNAS)</font>
 		      <?php }elseif($history_detail_row->status == '2'){ ?>
 		        <font color='green'>(LUNAS)</font>
+				<?php }elseif($history_detail_row->status == '5'){ ?>
+					<font color='yellow'>(MENUNGGU KONFIRMASI)</font>
 		      <?php } ?>
 				</h4>
 				<?php echo form_open('cart/download_invoice/'.$history_detail_row->id_trans) ?>

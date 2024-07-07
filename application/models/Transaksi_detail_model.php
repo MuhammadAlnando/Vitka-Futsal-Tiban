@@ -33,4 +33,52 @@ class Transaksi_detail_model extends CI_Model{
         return $query->result();
     }
 
+    public function update_bukti_pembayaran($id_trans, $bukti_pembayaran) {
+        $data = array(
+            'bukti_pembayaran' => $bukti_pembayaran
+        );
+        $this->db->where('id_trans', $id_trans);
+        $this->db->update('transaksi', $data);
+    }
+
+    
+    public function update_status($id_trans, $status) {
+        $data = array(
+            'status' => $status
+        );
+        $this->db->where('id_trans', $id_trans);
+        $this->db->update('transaksi', $data);
+    }
+
+    public function get_transaction($id_trans) {
+        $this->db->where('id_trans', $id_trans);
+        return $this->db->get('transaksi')->row();
+    }
+
+    // Membatalkan transaksi
+    public function cancel_transaction($id_trans) {
+        $this->db->where('id_trans', $id_trans);
+        return $this->db->delete('transaksi');
+    }
+
+
+    public function get_cart_history() {
+        // Query untuk mendapatkan riwayat transaksi
+        $this->db->order_by('created_date', 'desc');
+        return $this->db->get('transaksi')->result();
+    }
+
+    public function cek_cart_history() {
+        // Query untuk memeriksa riwayat transaksi
+        $this->db->select('id_trans');
+        $this->db->from('transaksi');
+        return $this->db->get()->row();
+    }
+
+    public function get_history_detail($id_trans) {
+        // Query untuk mendapatkan detail riwayat transaksi
+        $this->db->where('id_trans', $id_trans);
+        return $this->db->get('transaksi')->row();
+    }
+
 }

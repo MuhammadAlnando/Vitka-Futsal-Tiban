@@ -101,16 +101,34 @@
 						</tbody>
 					</table>
 				</div>
-				<form id="contactForm" enctype="multipart/form-data">
-    <input type="hidden" name="id_trans" value="<?php echo $cart_finished_row->id_trans; ?>">
-    <div class="form-group">
-        <label>Upload Bukti Pembayaran</label>
-        <input type="file" name="userfile" class="form-control">
-        <div class="text-danger"><?= form_error('userfile'); ?></div>
+ <!-- Tombol untuk memicu modal -->
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal<?php echo  $cart_finished_row->id_trans; ?>">
+        <i class="glyphicon glyphicon-upload"></i> Upload Bukti Pembayaran
+    </button>
+
+    <!-- Modal untuk upload bukti pembayaran -->
+    <div class="modal fade" id="uploadModal<?php echo  $cart_finished_row->id_trans; ?>" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel<?php echo  $cart_finished_row->id_trans; ?>">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="uploadModalLabel<?php echo  $cart_finished_row->id_trans; ?>">Upload Bukti Pembayaran</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo base_url('cart/upload_bukti/') .  $cart_finished_row->id_trans; ?>" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="bukti_pembayaran">Pilih File Bukti Pembayaran</label>
+                            <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-upload"></i> Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="button" id="submit" class="btn btn-sm btn-primary">Kirim</button>
-</form>
-<div id="notification"></div>
 			</div>
 
 			<div class="row">

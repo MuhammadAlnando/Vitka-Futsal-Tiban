@@ -32,7 +32,7 @@ class Transaksi extends CI_Controller
 
   public function upload_bukti_pembayaran() {
     $config['upload_path'] = './assets/images/transaksi/';
-    $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+    $config['allowed_types'] = 'jpg|jpeg|png|pdf|pdf';
     $config['max_size'] = 2048; // 2MB
     $config['encrypt_name'] = TRUE;
 

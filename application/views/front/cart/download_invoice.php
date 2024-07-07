@@ -18,6 +18,8 @@
         <p style='color:red'>(BELUM LUNAS)</p>
       <?php }elseif($cart_finished_row->status == '2'){ ?>
         <p style='color:green'>(LUNAS)</p>
+        <?php }elseif($cart_finished_row->status == '5'){ ?>
+          <p style='color:yellow'>(MENUNGGU KONFIRMASI)</p>
       <?php } ?>
     </b>
   </div>

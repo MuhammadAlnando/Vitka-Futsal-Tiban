@@ -47,6 +47,8 @@
                             echo "SUDAH LUNAS";
                         } elseif ($cart_finished_row->status == '3') {
                             echo "EXPIRED";
+                        } elseif ($cart_finished_row->status == '5') {
+                            echo "MENUNGGU KONFIRMASI";
                         }
                         ?></b><br/>
                 </div>
@@ -61,7 +63,7 @@
                                     <th style="text-align: center">Nama Lapangan</th>
                                     <th style="text-align: center">Harga</th>
                                     <th style="text-align: center">Tanggal</th>
-                                    <th style="text-align: center">Jumlah Mulai</th>
+                                    <th style="text-align: center">Jam Mulai</th>
                                     <th style="text-align: center">Durasi</th>
                                     <th style="text-align: center">Jam Selesai</th>
                                     <th style="text-align: center">Total</th>

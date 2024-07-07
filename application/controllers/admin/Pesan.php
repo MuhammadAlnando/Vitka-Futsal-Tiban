@@ -19,7 +19,7 @@ class Pesan extends CI_Controller {
             echo json_encode(array('success' => false, 'message' => validation_errors()));
         } else {
             $config['upload_path'] = './assets/images/pesan/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
             $config['max_size'] = 2048; // 2MB
             $this->upload->initialize($config);
 

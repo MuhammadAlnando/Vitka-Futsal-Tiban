@@ -43,6 +43,8 @@
                                                 <button type="button" name="status" class="btn btn-success"><i class="fa fa-check"></i> LUNAS</button>
                                                 <?php } elseif($data->status == '3'){ ?>
                                                 <button type="button" name="status" class="btn btn-danger"><i class="fa fa-remove"></i> EXPIRED</button>
+                                                <?php } elseif($data->status == '5'){ ?>
+                                                    <button type="button" name="status" class="btn btn-warning"><i class="fa fa-minus-circle"></i> MENUNGGU</button>
                                                 <?php } ?>
                                             </td>
                                             <td style="text-align:center">

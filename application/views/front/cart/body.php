@@ -131,46 +131,60 @@
     });
 
     $('.tanggal').on('changeDate', function(ev) {
-        var tanggal_el = $(this);
-        var tanggal_val = $(this).val();
-        var jam_mulai_el = tanggal_el.parent().parent().find(".jam_mulai");
-        var durasi_el = tanggal_el.parent().parent().find(".durasi");
-        var jam_selesai_el = durasi_el.parent().parent().find(".jam_selesai");
-        var loading_container_el = tanggal_el.parent().parent().find(".loading_container");
-        var lapangan_id_el = tanggal_el.parent().parent().find(".lapangan_id");
+    var tanggal_el = $(this);
+    var tanggal_val = $(this).val();
+    var jam_mulai_el = tanggal_el.parent().parent().find(".jam_mulai");
+    var durasi_el = tanggal_el.parent().parent().find(".durasi");
+    var jam_selesai_el = durasi_el.parent().parent().find(".jam_selesai");
+    var loading_container_el = tanggal_el.parent().parent().find(".loading_container");
+    var lapangan_id_el = tanggal_el.parent().parent().find(".lapangan_id");
 
-        jam_mulai_el.hide();
-        loading_container_el.show();
+    jam_mulai_el.hide();
+    loading_container_el.show();
 
-        $.post('<?php echo base_url(); ?>Cart/getJamMulai', {
-                tanggal: tanggal_val,
-                lapangan_id: lapangan_id_el.val()
-            }, function(data) {
-                jam_mulai_el.show();
-                loading_container_el.hide();
-                jam_mulai_el.html("");
+    $.post('<?php echo base_url(); ?>Cart/getJamMulai', {
+            tanggal: tanggal_val,
+            lapangan_id: lapangan_id_el.val()
+        }, function(data) {
+            jam_mulai_el.show();
+            loading_container_el.hide();
+            jam_mulai_el.html("");
 
-                jam_mulai_el.append("<option value='' selected='selected'>- Pilih Jam Mulai -</option>");
+            jam_mulai_el.append("<option value='' selected='selected'>- Pilih Jam Mulai -</option>");
 
-                var count = 0;
+            var count = 0;
+            var now = moment(); // Jam saat ini
 
-                data.forEach(function(item, index) {
+            data.forEach(function(item, index) {
+                var jam_mulai = moment(item.jam_mulai, 'HH:mm:ss');
+
+                // Validasi untuk tanggal hari ini
+                if (tanggal_val === moment().format('YYYY-MM-DD')) {
+                    if (jam_mulai.isAfter(now)) {
+                        jam_mulai_el.append("<option durasi='" + item.durasi + "'>" + item.jam_mulai + "</option>");
+                        count++;
+                    }
+                } else {
+                    // Tidak ada validasi tambahan untuk tanggal hari esok
                     jam_mulai_el.append("<option durasi='" + item.durasi + "'>" + item.jam_mulai + "</option>");
                     count++;
-                });
-
-                durasi_el.val(0);
-                jam_selesai_el.html("");
-
-                if (count == 0) {
-                    jam_mulai_el.html("");
-                    jam_mulai_el.append("<option value='' selected='selected'>- Tidak ada pilihan -</option>");
                 }
+            });
 
-            },
-            'json'
-        );
-    });
+            durasi_el.val(0);
+            jam_selesai_el.html("");
+
+            if (count == 0) {
+                jam_mulai_el.html("");
+                jam_mulai_el.append("<option value='' selected='selected'>- Tidak ada pilihan -</option>");
+            }
+
+        },
+        'json'
+    );
+});
+
+
 
     $(document).on("change", ".jam_mulai", function() {
         var jam_mulai_el = $(this);
