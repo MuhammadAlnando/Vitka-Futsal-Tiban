@@ -7,15 +7,15 @@
         <?php foreach($lapangan_new as $lapangan): ?>
           <div class="col-lg-4 mb-4"> <!-- Kolom untuk setiap lapangan -->
           <h3 class="card-title"><b><?= $lapangan->nama_lapangan ?></b></h3>
-            <div class="card shadow-sm" style="height: 100%;">
+            <div class="card shadow-sm" style="height: 100%;" >
               <?php if(empty($lapangan->foto)): ?>
-                <img class="card-img-top" src="<?= base_url('assets/images/no_image_thumb.png') ?>" style="height: 200px;">
+                <img class="card-img-top" src="<?= base_url('assets/images/no_image_thumb.png') ?>" style="height: 170px;">
               <?php else: ?>
-                <img class="card-img-top" src="<?= base_url('assets/images/lapangan/' . $lapangan->foto) ?>" style="height: 200px;">
+                <img class="card-img-top" src="<?= base_url('assets/images/lapangan/' . $lapangan->foto) ?>" style="height: 170px;">
               <?php endif; ?>
               <div class="card-body">
                 <br>
-                <strong>Tersedia Sekarang:</strong> 
+                <strong>Jadwal Hari ini:</strong> 
                 <div class="jam-mulai" id="jam_mulai_<?= $lapangan->id_lapangan ?>">
                   <!-- Tempat untuk menampilkan tanggal dan jam mulai -->
                 </div>
@@ -103,12 +103,13 @@ function compareTimes(time1, time2) {
 
 <!-- CSS untuk menambahkan border pada jam mulai -->
 <style>
-
 .jam-mulai-item {
   display: inline-block;
   padding: 5px;
   margin-right: 5px;
   background-color: #f0f0f0;
-  border-radius: 3px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 2px;
 }
 </style>

@@ -45,19 +45,13 @@
                             <?php echo form_textarea($alamat, '', 'class="form-control" rows="3"'); ?>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Provinsi</label>
-                                    <?php echo form_dropdown('', $ambil_provinsi, '', 'class="form-control" id="provinsi_id" onchange="tampilKota();"'); ?>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Kabupaten/ Kota</label>
-                                    <?php echo form_dropdown('', array(''=>'- Pilih Kota -'), '', 'class="form-control" id="kota_id"'); ?>
-                                </div>
-                            </div>
-                        </div>
+          <div class="col-sm-6"><label>Provinsi</label>
+            <?php echo form_dropdown('', $ambil_provinsi, '', $provinsi_id); ?><br>
+          </div>
+          <div class="col-sm-6"><label>Kabupaten/ Kota</label>
+            <?php echo form_dropdown('', array(''=>'- Pilih Kota -'), '', $kota_id); ?>
+          </div>
+        </div>
                         <hr>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>

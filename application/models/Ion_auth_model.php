@@ -2679,20 +2679,28 @@ class Ion_auth_model extends CI_Model
   }
 
 	// additional
-	public function get_all_users_group(){
-    $this->db->order_by('name_group', 'ASC');
-    $query = $this->db->get('users_group');
+	public function get_all_users_group()
+    {
+        $this->db->order_by('name_group', 'ASC');
+        $query = $this->db->get('users_group');
 
-    if($query->num_rows() > 0){
-     	$data = array();
-	    foreach ($query->result_array() as $row)
-	    {
-	      $data[$row['id_group']] = $row['name_group'];
-	    }
-	    return $data;
+        if ($query->num_rows() > 0) {
+            $data = array();
+            foreach ($query->result_array() as $row) {
+                $data[$row['id_group']] = $row['name_group'];
+            }
+            return $data;
+        }
+        return array(); // Return an empty array if no rows are found
     }
-	}
 
+	public function get_user($id)
+    {
+        // Assuming you have a method to get a user's data by ID
+        $query = $this->db->get_where('users', array('id' => $id));
+        return $query->row();
+    }
+	
 	public function profil()
 	{
 		$this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi');

@@ -574,6 +574,8 @@ public function edit_user($id)
     // Load view with user data
     $this->data['title'] = 'Edit User';
     $this->data['user'] = $user;
+	$data['get_all_users_group'] = $this->Ion_auth_model->get_all_users_group(); // Make sure this method exists and returns the user groups
+
 
     $this->load->view('back/auth/edit_user', $this->data); // Ensure 'back/auth/edit_user' matches your actual view path
 }

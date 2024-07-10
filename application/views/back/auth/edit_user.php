@@ -20,36 +20,52 @@
                             <?php endif; ?>
                             <?php echo validation_errors(); ?>
                             <?php echo form_open('admin/auth/update_user/'.$user->id); ?>
-                            <div class="form-group">
-                                <label>Nama</label>
-                                <input type="text" class="form-control" name="name" value="<?php echo set_value('name', $user->name); ?>">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#umum" aria-controls="umum" role="tab" data-toggle="tab"><label>UMUM</label></a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#login" aria-controls="login" role="tab" data-toggle="tab"><label>LOGIN</label></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="umum"><br>
+                                    <div class="form-group">
+                                        <label>Nama</label>
+                                        <input type="text" class="form-control" name="name" value="<?php echo set_value('name', $user->name); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <textarea class="form-control" name="address"><?php echo set_value('address', $user->address); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="text" class="form-control" name="phone" value="<?php echo set_value('phone', $user->phone); ?>">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    <a href="<?php echo base_url('admin/auth'); ?>" class="btn btn-default">Kembali</a>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="login"><br>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" name="username" value="<?php echo set_value('username', $user->username); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" name="email" value="<?php echo set_value('email', $user->email); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Change Password</label>
+                                        <input type="password" class="form-control" name="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password Confirm</label>
+                                        <input type="password" class="form-control" name="password_confirm">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    <a href="<?php echo base_url('admin/auth'); ?>" class="btn btn-default">Kembali</a>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" class="form-control" name="username" value="<?php echo set_value('username', $user->username); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email" value="<?php echo set_value('email', $user->email); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" name="address"><?php echo set_value('address', $user->address); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" name="phone" value="<?php echo set_value('phone', $user->phone); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password">
-                            </div>
-                            <div class="form-group">
-                                <label>Password Confirm</label>
-                                <input type="password" class="form-control" name="password_confirm">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                            <a href="<?php echo base_url('admin/auth'); ?>" class="btn btn-default">Kembali</a>
                             <?php echo form_close(); ?>
                         </div>
                     </div>
