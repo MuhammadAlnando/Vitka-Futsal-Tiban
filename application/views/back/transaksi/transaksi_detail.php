@@ -46,7 +46,7 @@
                         } elseif ($cart_finished_row->status == '2') {
                             echo "SUDAH LUNAS";
                         } elseif ($cart_finished_row->status == '3') {
-                            echo "EXPIRED";
+                            echo "DITOLAK/EXPIRED";
                         } elseif ($cart_finished_row->status == '5') {
                             echo "MENUNGGU KONFIRMASI";
                         }

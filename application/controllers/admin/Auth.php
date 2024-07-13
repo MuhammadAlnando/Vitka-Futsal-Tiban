@@ -91,7 +91,7 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', '<div class="box-body">
-					<div class="alert alert-block alert-success"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+					<div class="alert" style="background-color: #EB7622; color: white;"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
 					<i class="ace-icon fa fa-bullhorn green"></i> Login Berhasil
 					</div></div>');
 				redirect('admin/dashboard', 'refresh');

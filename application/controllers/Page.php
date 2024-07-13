@@ -102,7 +102,7 @@ class Page extends CI_Controller {
 
 				if ($this->email->send())
 		    {
-					$this->session->set_flashdata('message', '<div class="row"><div class="col-lg-12"><div class="alert alert-success alert">Pesan Anda telah Terkirim, Terima Kasih</div></div></div>');
+					$this->session->set_flashdata('message', '<div class="row"><div class="col-lg-12"><div class="alert" style="background-color: #EB7622; color: white;">Pesan Anda telah Terkirim, Terima Kasih</div></div></div>');
 					redirect(site_url('contact'));
 		    }
 		    else

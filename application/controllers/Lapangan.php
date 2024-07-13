@@ -31,5 +31,19 @@ class Lapangan extends CI_Controller {
         $this->load->view('front/lapangan/lapangan_view', $data); // Kirim data ke view
         $this->load->view('front/footer', $data);
     }
+
+    public function detail($id_lapangan) {
+        $this->load->model('Lapangan_model');
+        $this->data['title'] = "Lapangan Detail";
+        $data['lapangan'] = $this->Lapangan_model->get_lapangan_by_id($id_lapangan);
+        $data = array_merge($data, $this->data); // Gabungkan data
+
+        $this->load->view('front/header', $data);
+        $this->load->view('front/navbar', $data);
+       
+        $this->load->view('front/lapangan/lapangan_detail', $data);
+        $this->load->view('front/footer', $data);
+        
+      }
 }
 ?>

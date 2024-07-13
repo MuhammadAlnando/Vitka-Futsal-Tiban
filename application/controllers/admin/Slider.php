@@ -115,7 +115,7 @@ class Slider extends CI_Controller
             // eksekusi query INSERT
             $this->Slider_model->insert($data);
             // set pesan data berhasil dibuat
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert">Data berhasil dibuat</div>');
+            $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Data berhasil dibuat</div>');
             redirect(site_url('admin/slider'));
           }
       }
@@ -131,7 +131,7 @@ class Slider extends CI_Controller
         // eksekusi query INSERT
         $this->Slider_model->insert($data);
         // set pesan data berhasil dibuat
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert">Data berhasil dibuat</div>');
+        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Data berhasil dibuat</div>');
         redirect(site_url('admin/slider'));
       }
     }

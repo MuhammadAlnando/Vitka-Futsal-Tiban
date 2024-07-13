@@ -63,7 +63,7 @@ class Kategori extends CI_Controller
         // eksekusi query INSERT
         $this->Kategori_model->insert($data);
         // set pesan data berhasil dibuat
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert">Data berhasil dibuat</div>');
+        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Data berhasil dibuat</div>');
         redirect(site_url('admin/kategori'));
       }
   }
@@ -119,7 +119,7 @@ class Kategori extends CI_Controller
         );
 
         $this->Kategori_model->update($this->input->post('id_kategori'), $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert">Edit Data Berhasil</div>');
+        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Edit Data Berhasil</div>');
         redirect(site_url('admin/kategori'));
       }
   }
@@ -131,7 +131,7 @@ class Kategori extends CI_Controller
     if ($row)
     {
       $this->Kategori_model->delete($id);
-      $this->session->set_flashdata('message', '<div class="alert alert-success alert">Data berhasil dihapus</div>');
+      $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Data berhasil dihapus</div>');
       redirect(site_url('admin/kategori'));
     }
       // Jika data tidak ada

@@ -93,8 +93,9 @@ class Cart extends CI_Controller
 					$this->Cart_model->insert_detail($data2);
 
 					// set pesan data berhasil dibuat
-					$this->session->set_flashdata('message', '<div class="alert alert-success alert">Booking berhasil ditambahkan</div>');
-					redirect(site_url('cart'));
+					$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Lapangan berhasil ditambahkan</div>');
+redirect(site_url('cart'));
+
 				}
 			}
 			// jika belum ada transaksi
@@ -141,7 +142,7 @@ class Cart extends CI_Controller
 				$this->Cart_model->insert_detail($data2);
 
 				// set pesan data berhasil dibuat
-				$this->session->set_flashdata('message', '<div class="alert alert-success alert">Barang berhasil ditambahkan</div>');
+				$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Lapangan berhasil ditambahkan</div>');
 				redirect(site_url('cart'));
 			}
 		} else {
@@ -163,7 +164,7 @@ class Cart extends CI_Controller
 			$id_transdet 			= $row->id_transdet;
 
 			$this->Cart_model->delete($id_transdet);
-			$this->session->set_flashdata('message', '<div class="alert alert-success alert">Booking Anda Berhasil dihapus</div>');
+			$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Booking Anda Berhasil dihapus</div>');
 			redirect(site_url('cart'));
 		}
 		// Jika data tidak ada

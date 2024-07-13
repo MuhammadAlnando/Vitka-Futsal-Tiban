@@ -11,8 +11,10 @@
 		        <font color='red'>(BELUM LUNAS)</font>
 		      <?php }elseif($history_detail_row->status == '2'){ ?>
 		        <font color='green'>(LUNAS)</font>
+				<?php }elseif($history_detail_row->status == '3'){ ?>
+					<font color='green'>(DITOLAK/EXPIRED)</font>
 				<?php }elseif($history_detail_row->status == '5'){ ?>
-					<font color='yellow'>(MENUNGGU KONFIRMASI)</font>
+					<font color='#EB7622;'>(MENUNGGU KONFIRMASI)</font>
 		      <?php } ?>
 				</h4>
 				<?php echo form_open('cart/download_invoice/'.$history_detail_row->id_trans) ?>

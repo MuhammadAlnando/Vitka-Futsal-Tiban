@@ -42,6 +42,22 @@ class Transaksi_detail_model extends CI_Model{
     }
 
     
+
+    public function get_by_transaksi_id($trans_id)
+{
+    $this->db->where('trans_id', $trans_id);
+    $query = $this->db->get('transaksi_detail'); // Nama tabel transaksi_detail
+    
+    // Debugging
+    echo $this->db->last_query(); // Ini akan menampilkan query SQL yang terakhir dieksekusi
+    
+    return $query->result();
+}
+
+
+
+
+
     public function update_status($id_trans, $status) {
         $data = array(
             'status' => $status

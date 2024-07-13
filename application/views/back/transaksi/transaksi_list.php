@@ -42,7 +42,7 @@
                                                 <?php } elseif($data->status == '2'){ ?>
                                                 <button type="button" name="status" class="btn btn-success"><i class="fa fa-check"></i> LUNAS</button>
                                                 <?php } elseif($data->status == '3'){ ?>
-                                                <button type="button" name="status" class="btn btn-danger"><i class="fa fa-remove"></i> EXPIRED</button>
+                                                <button type="button" name="status" class="btn btn-danger"><i class="fa fa-remove"></i> DITOLAK/EXPIRED</button>
                                                 <?php } elseif($data->status == '5'){ ?>
                                                     <button type="button" name="status" class="btn btn-warning"><i class="fa fa-minus-circle"></i> MENUNGGU</button>
                                                 <?php } ?>
@@ -57,15 +57,21 @@
                                                 <?php } ?>
                                             </td>
                                             <td style="text-align:center">
-                                                <?php if($data->status != '2'){ ?>
-                                                <a href="<?php echo base_url('admin/transaksi/set_lunas/').$data->id_trans ?>">
-                                                    <button name="update" class="btn btn-success"><i class="fa fa-check"></i> Set Lunas</button>
-                                                </a>
-                                                <?php } ?>
-                                                <a href="<?php echo base_url('admin/transaksi/detail/').$data->id_trans ?>">
-                                                    <button name="update" class="btn btn-primary"><i class="fa fa-search-plus"></i> Detail</button>
-                                                </a>
-                                            </td>
+    <?php if($data->status != '2'){ ?>
+        <a href="<?php echo base_url('admin/transaksi/set_lunas/').$data->id_trans ?>">
+            <button name="update" class="btn btn-success"><i class="fa fa-check"></i> Set Lunas</button>
+        </a>
+    <?php } ?>
+    <?php if($data->status != '3' && $data->status != '2'){ ?>
+        <a href="<?php echo base_url('admin/transaksi/set_tolak/').$data->id_trans ?>">
+            <button name="update" class="btn btn-danger"><i class="fa fa-times"></i> Set Tolak</button>
+        </a>
+    <?php } ?>
+    <a href="<?php echo base_url('admin/transaksi/detail/').$data->id_trans ?>">
+        <button name="update" class="btn btn-primary"><i class="fa fa-search-plus"></i> Detail</button>
+    </a>
+</td>
+
                                         </tr>
                                         <?php } ?>
                                     </tbody>

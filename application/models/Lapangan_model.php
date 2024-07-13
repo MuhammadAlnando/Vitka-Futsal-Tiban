@@ -230,4 +230,10 @@ class Lapangan_model extends CI_Model
     return $this->db->get($this->table)->row();
   }
 
+  public function get_lapangan_by_id($id_lapangan) {
+    $this->db->where('id_lapangan', $id_lapangan);
+    $query = $this->db->get('lapangan');
+    return $query->row();
+  }
+
 }

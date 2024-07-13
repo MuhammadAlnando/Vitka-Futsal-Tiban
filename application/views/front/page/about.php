@@ -6,7 +6,7 @@
     <hr>
 
     <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 text-center" style="margin-top: 30px;">
             <?php if (empty($company->foto)) : ?>
                 <img src="<?php echo base_url('assets/images/no_image_thumb.png') ?>" class="img-fluid" style="max-width: 100%; height: auto;">
             <?php else : ?>

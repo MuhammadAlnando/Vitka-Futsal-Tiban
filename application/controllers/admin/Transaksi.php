@@ -252,7 +252,7 @@ class Transaksi extends CI_Controller
   			'status'			=>	'2',
   		));
 
-      $this->session->set_flashdata('message', '<div class="alert alert-success alert">Transaksi berhasil dinyatakan LUNAS</div>');
+      $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Transaksi berhasil dinyatakan LUNAS</div>');
       redirect(site_url('admin/transaksi'));
     }
       // Jika data tidak ada
@@ -262,6 +262,45 @@ class Transaksi extends CI_Controller
         redirect(site_url('admin/transaksi'));
       }
   }
+
+  public function set_tolak($id)
+{
+    $row = $this->Cart_model->get_by_id($id);
+
+    if ($row)
+    {
+        // Ubah status transaksi menjadi ditolak
+        $this->db->where('id_trans', $id);
+        $this->db->update('transaksi', array(
+            'status' => '3', // Misalkan '3' adalah status untuk ditolak
+        ));
+
+        // Ambil data jam terkait dari transaksi yang ditolak
+        $transaksi_detail = $this->Transaksi_detail_model->get_by_transaksi_id($id);
+
+        // Loop melalui setiap detail transaksi untuk memperbarui status jam
+        foreach ($transaksi_detail as $detail) {
+            $this->db->where('id', $detail->id_jam); // Pastikan ini adalah kolom yang benar untuk kunci utama di tabel jam
+            $this->db->update('jam', array(
+                'is_available' => '1', // Ganti dengan status yang sesuai untuk waktu yang tersedia
+            ));
+        }
+
+        // Debugging: Tampilkan pesan untuk memastikan update berhasil
+        echo "Transaksi berhasil ditolak. Waktu yang ditolak kembali tersedia.";
+
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" style="color: white;">Transaksi berhasil ditolak</div>');
+        redirect(site_url('admin/transaksi'));
+    }
+    else
+    {
+        // Jika data tidak ada
+        $this->session->set_flashdata('message', '<div class="alert alert-warning">Transaksi tidak ditemukan</div>');
+        redirect(site_url('admin/transaksi'));
+    }
+}
+
+  
 
   public function getJamMulai(){
 		$tanggal = $this->input->post('tanggal');
@@ -435,7 +474,7 @@ class Transaksi extends CI_Controller
         $this->db->where('id',$this->input->post('id'));
         $this->db->update('diskon', $data);
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert">Edit Data Berhasil</div>');
+        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Edit Data Berhasil</div>');
         redirect(site_url('admin/transaksi/update_diskon/1'));
       }
   }

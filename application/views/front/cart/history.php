@@ -43,6 +43,8 @@
                                                     <button type="button" name="status" class="btn btn-danger">BELUM LUNAS</button>
                                                 <?php elseif($history->status == '2'): ?>
                                                     <button type="button" name="status" class="btn btn-success">LUNAS</button>
+                                                    <?php elseif($history->status == '3'): ?>
+                                                        <button type="button" name="status" class="btn btn-danger">DITOLAK/EXPIRED</button>
                                                 <?php elseif($history->status == '5'): ?>
                                                     <button type="button" name="status" class="btn btn-warning">MENUNGGU</button>
                                                 <?php endif; ?>

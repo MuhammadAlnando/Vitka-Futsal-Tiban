@@ -69,9 +69,13 @@ $route['gallery/(:any)']    = 'gallery/read/$1';
 
 $route['lapangan'] = 'lapangan';
 
+$route['lapangan/detail/(:num)'] = 'lapangan/detail/$1';
+
+
 $route['admin/pesan'] = 'admin/pesan/index';
 
 // config/routes.php
+
 $route['admin/pesan/delete/(:num)'] = 'admin/pesan/delete/$1';
 
 

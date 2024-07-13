@@ -168,7 +168,7 @@ class Company extends CI_Controller
               );
 
               $this->Company_model->update($this->input->post('id_company'), $data);
-              $this->session->set_flashdata('message', '<div class="alert alert-success alert">Edit Data Berhasil</div>');
+              $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Edit Data Berhasil</div>');
               redirect(site_url('admin/company/update/1'));
             }
         }
@@ -187,7 +187,7 @@ class Company extends CI_Controller
             );
 
             $this->Company_model->update($this->input->post('id_company'), $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert">Edit Data Berhasil</div>');
+            $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Edit Data Berhasil</div>');
             redirect(site_url('admin/company/update/1'));
           }
       }

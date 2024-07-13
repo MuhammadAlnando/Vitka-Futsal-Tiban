@@ -61,14 +61,14 @@ class Auth extends CI_Controller {
 				'address'    	=> $this->input->post('alamat'),
 				'provinsi' 		=> $this->input->post('provinsi_id'),
 				'kota'   			=> $this->input->post('kota_id'),
-				'usertype'    => '4',
+				'usertype'    => '3',
 			);
 
 			// mengirimkan data yang sudah disediakan diatas $additional_data $email, $identity $password
 			$this->ion_auth->register($identity, $password, $email, $additional_data);
 
 			// check to see if we are creating the user | redirect them back to the admin page
-			$this->session->set_flashdata('message', '<div class="alert alert-success alert">Registrasi Berhasil, silahkan login untuk mulai booking lapangan.</div>');
+			$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Registrasi Berhasil, silahkan login untuk mulai booking lapangan.</div>');
 			redirect(base_url());
 		}
 			else
@@ -202,7 +202,7 @@ class Auth extends CI_Controller {
 				if ($this->ion_auth->login_front($this->input->post('identity'), $this->input->post('password'), $remember))
 				{
 					//set message dan redirect ke home apabila berhasil login
-					$this->session->set_flashdata('message', '<div class="alert alert-block alert-success"><i class="ace-icon fa fa-bullhorn green"></i> Login Berhasil</div>');
+					$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;"><i class="ace-icon fa fa-bullhorn green"></i> Login Berhasil</div>');
 					redirect(base_url(), 'refresh');
 				}
 					else
@@ -534,7 +534,7 @@ class Auth extends CI_Controller {
 					$change = $this->ion_auth->reset_password($identity, $this->input->post('new'));
 					if ($change)
 					{
-						$this->session->set_flashdata('message', '<div class="alert alert-success alert">Reset Password Berhasil</div>');
+						$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Reset Password Berhasil</div>');
 						redirect("auth/login", 'refresh');
 					}
 					else
