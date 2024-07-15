@@ -14,29 +14,29 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-lg-12">
-						<div class="box box-primary">
+            <div class="box box-primary">
               <div class="box-body">
-								<a href="<?php echo base_url('admin/').strtolower($module).'/create' ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
-								<hr>
-								<?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                <a href="<?php echo base_url('admin/').strtolower($module).'/create' ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                <hr>
+                <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                 <div class="table-responsive no-padding">
-									<table id="datatable" class="table table-striped">
-										<thead>
-											<tr>
-												<th style="text-align: center">No.</th>
-												<th style="text-align: center">Nama Lapangan</th>
+                  <table id="datatable" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th style="text-align: center">No.</th>
+                        <th style="text-align: center">Nama Lapangan</th>
                         <th style="text-align: center">Harga per Jam</th>
-                        
-												<th style="text-align: center">Aksi</th>
-											</tr>
-										</thead>
-										<tbody>
+                        <th style="text-align: center">Harga Malam</th> <!-- Kolom Harga Malam -->
+                        <th style="text-align: center">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <?php $no=1; foreach($get_all as $data){ ?>
                         <tr>
                           <td style="text-align: center"><?php echo $no++ ?></td>
                           <td style="text-align: center"><?php echo $data->nama_lapangan ?></td>
                           <td style="text-align: center"><?php echo number_format($data->harga) ?></td>
-                          
+                          <td style="text-align: center"><?php echo number_format($data->harga_malam) ?></td> <!-- Menampilkan Harga Malam -->
                           <td style="text-align: center">
                             <?php
                             echo anchor(site_url('admin/lapangan/update/'.$data->id_lapangan),'<i class="fa fa-pencil"></i>','title="Edit", class="btn btn-sm btn-warning"'); echo ' ';
@@ -46,10 +46,10 @@
                         </tr>
                       <?php } ?>
                     </tbody>
-									</table>
+                  </table>
                 </div>
-							</div>
-						</div>
+              </div>
+            </div>
           </div><!-- ./col -->
         </div><!-- /.row -->
       </section><!-- /.content -->
@@ -57,11 +57,11 @@
     <?php $this->load->view('back/footer') ?>
   </div><!-- ./wrapper -->
   <?php $this->load->view('back/js') ?>
-	<!-- DATA TABLES-->
+  <!-- DATA TABLES-->
   <link href="<?php echo base_url('assets/plugins/') ?>datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
   <script src="<?php echo base_url('assets/plugins/') ?>datatables/jquery.dataTables.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/plugins/') ?>datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
-	<script type="text/javascript">
+  <script type="text/javascript">
   $('#datatable').dataTable({
     "bPaginate": true,
     "bLengthChange": true,

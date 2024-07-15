@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                            <?php echo $this->session->flashdata('message') ? $this->session->flashdata('message') : ''; ?>
                             <div class="table-responsive no-padding">
                                 <table id="datatable" class="table table-striped">
                                     <thead>
@@ -27,25 +27,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $no=1; foreach ($get_all as $data){ ?>
+                                        <?php $no = 1; foreach ($get_all as $data) { ?>
                                         <tr>
                                             <td style="text-align:center"><?php echo $no++ ?></td>
-                                            <td style="text-align:center"><?php echo $data->id_invoice ?></a></td>
-                                            <td style="text-align:center"><?php echo $data->name ?></a></td>
+                                            <td style="text-align:center"><?php echo $data->id_invoice ?></td>
+                                            <td style="text-align:center"><?php echo $data->name ?></td>
                                             <td style="text-align:center"><?php echo tgl_indo($data->created_date) ?></td>
-                                            <td style="text-align:center"><?php echo number_format($data->grand_total) ?></a></td>
+                                            <td style="text-align:center"><?php echo number_format($data->grand_total) ?></td>
                                             <td style="text-align:center">
-                                                <?php if($data->status == '0'){ ?>
-                                                <button type="button" name="status" class="btn btn-primary"><i class="fa fa-ban"></i> BELUM CHECKOUT</button>
-                                                <?php } elseif($data->status == '1'){ ?>
-                                                <button type="button" name="status" class="btn btn-warning"><i class="fa fa-minus-circle"></i> BELUM LUNAS</button>
-                                                <?php } elseif($data->status == '2'){ ?>
-                                                <button type="button" name="status" class="btn btn-success"><i class="fa fa-check"></i> LUNAS</button>
-                                                <?php } elseif($data->status == '3'){ ?>
-                                                <button type="button" name="status" class="btn btn-danger"><i class="fa fa-remove"></i> DITOLAK/EXPIRED</button>
-                                                <?php } elseif($data->status == '5'){ ?>
-                                                    <button type="button" name="status" class="btn btn-warning"><i class="fa fa-minus-circle"></i> MENUNGGU</button>
-                                                <?php } ?>
+                                                <?php
+                                                switch ($data->status) {
+                                                    case '0':
+                                                        echo '<button type="button" class="btn btn-primary"><i class="fa fa-ban"></i> BELUM CHECKOUT</button>';
+                                                        break;
+                                                    case '1':
+                                                        echo '<button type="button" class="btn btn-warning"><i class="fa fa-minus-circle"></i> BELUM LUNAS</button>';
+                                                        break;
+                                                    case '2':
+                                                        echo '<button type="button" class="btn btn-success"><i class="fa fa-check"></i> LUNAS</button>';
+                                                        break;
+                                                    case '3':
+                                                        echo '<button type="button" class="btn btn-danger"><i class="fa fa-remove"></i> DITOLAK/EXPIRED</button>';
+                                                        break;
+                                                    case '5':
+                                                        echo '<button type="button" class="btn btn-warning"><i class="fa fa-minus-circle"></i> MENUNGGU</button>';
+                                                        break;
+                                                }
+                                                ?>
                                             </td>
                                             <td style="text-align:center">
                                                 <?php if ($data->bukti_pembayaran) { ?>
@@ -57,21 +65,14 @@
                                                 <?php } ?>
                                             </td>
                                             <td style="text-align:center">
-    <?php if($data->status != '2'){ ?>
-        <a href="<?php echo base_url('admin/transaksi/set_lunas/').$data->id_trans ?>">
-            <button name="update" class="btn btn-success"><i class="fa fa-check"></i> Set Lunas</button>
-        </a>
-    <?php } ?>
-    <?php if($data->status != '3' && $data->status != '2'){ ?>
-        <a href="<?php echo base_url('admin/transaksi/set_tolak/').$data->id_trans ?>">
-            <button name="update" class="btn btn-danger"><i class="fa fa-times"></i> Set Tolak</button>
-        </a>
-    <?php } ?>
-    <a href="<?php echo base_url('admin/transaksi/detail/').$data->id_trans ?>">
-        <button name="update" class="btn btn-primary"><i class="fa fa-search-plus"></i> Detail</button>
-    </a>
-</td>
-
+                                                <?php if($data->status != '2'){ ?>
+                                                    <a href="<?php echo base_url('admin/transaksi/set_lunas/'.$data->id_trans) ?>" class="btn btn-success"><i class="fa fa-check"></i>Lunas</a>
+                                                <?php } ?>
+                                                <?php if($data->status != '3' && $data->status != '2'){ ?>
+                                                    <a href="<?php echo base_url('admin/transaksi/set_tolak/'.$data->id_trans) ?>" class="btn btn-danger"><i class="fa fa-times"></i>Tolak</a>
+                                                <?php } ?>
+                                                <a href="<?php echo base_url('admin/transaksi/detail/'.$data->id_trans) ?>" class="btn btn-primary"><i class="fa fa-search-plus"></i></a>
+                                            </td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
@@ -87,19 +88,21 @@
 </div><!-- ./wrapper -->
 <?php $this->load->view('back/js') ?>
 <!-- DATA TABLES-->
-<link href="<?php echo base_url('assets/plugins/') ?>datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<script src="<?php echo base_url('assets/plugins/') ?>datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url('assets/plugins/') ?>datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+<link href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.css') ?>" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url('assets/plugins/datatables/jquery.dataTables.min.js') ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js') ?>" type="text/javascript"></script>
 <script type="text/javascript">
-$('#datatable').dataTable({
-    "bPaginate": true,
-    "bLengthChange": true,
-    "bFilter": true,
-    "bSort": true,
-    "bInfo": true,
-    "bAutoWidth": false,
-    "aaSorting": [[0,'desc']],
-    "lengthMenu": [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "Semua"]]
+$(document).ready(function() {
+    $('#datatable').DataTable({
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "bSort": true,
+        "bInfo": true,
+        "bAutoWidth": false,
+        "aaSorting": [[0,'desc']],
+        "lengthMenu": [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "Semua"]]
+    });
 });
 </script>
 </body>

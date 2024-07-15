@@ -202,7 +202,7 @@ class Auth extends CI_Controller {
 				if ($this->ion_auth->login_front($this->input->post('identity'), $this->input->post('password'), $remember))
 				{
 					//set message dan redirect ke home apabila berhasil login
-					$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;"><i class="ace-icon fa fa-bullhorn green"></i> Login Berhasil</div>');
+					$this->session->set_flashdata('message', '<div class="alert" style="background-color: #223C95; color: white;"><i class="ace-icon fa fa-bullhorn green"></i> Login Berhasil</div>');
 					redirect(base_url(), 'refresh');
 				}
 					else

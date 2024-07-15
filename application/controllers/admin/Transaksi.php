@@ -272,7 +272,7 @@ class Transaksi extends CI_Controller
         // Ubah status transaksi menjadi ditolak
         $this->db->where('id_trans', $id);
         $this->db->update('transaksi', array(
-            'status' => '3', // Misalkan '3' adalah status untuk ditolak
+            'status' => '3', // '3' adalah status untuk ditolak
         ));
 
         // Ambil data jam terkait dari transaksi yang ditolak
@@ -280,25 +280,26 @@ class Transaksi extends CI_Controller
 
         // Loop melalui setiap detail transaksi untuk memperbarui status jam
         foreach ($transaksi_detail as $detail) {
-            $this->db->where('id', $detail->id_jam); // Pastikan ini adalah kolom yang benar untuk kunci utama di tabel jam
+          $this->db->where('id', $detail->id_jam);
+          // Kolom kunci utama di tabel jam
             $this->db->update('jam', array(
-                'is_available' => '1', // Ganti dengan status yang sesuai untuk waktu yang tersedia
-            ));
+                'is_available' => '1', // Ubah kembali menjadi tersedia
+            ));// Tambahkan pesan untuk debugging
+            echo "Jam dengan ID " . $detail->id_jam . " telah diubah menjadi tersedia.";
         }
 
-        // Debugging: Tampilkan pesan untuk memastikan update berhasil
-        echo "Transaksi berhasil ditolak. Waktu yang ditolak kembali tersedia.";
-
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" style="color: white;">Transaksi berhasil ditolak</div>');
+        // Set flashdata untuk pesan sukses
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" style="color: white;">Transaksi berhasil ditolak. Waktu yang ditolak kembali tersedia.</div>');
         redirect(site_url('admin/transaksi'));
     }
     else
     {
-        // Jika data tidak ada
+        // Jika data tidak ditemukan
         $this->session->set_flashdata('message', '<div class="alert alert-warning">Transaksi tidak ditemukan</div>');
         redirect(site_url('admin/transaksi'));
     }
 }
+
 
   
 

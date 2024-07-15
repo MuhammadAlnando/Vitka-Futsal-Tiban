@@ -155,24 +155,28 @@ redirect(site_url('cart'));
 	}
 
 	public function delete($id)
-	{
-		$id = $this->uri->segment(3);
+{
+    $id = $this->uri->segment(3); // Mengambil ID dari URI segment
 
-		$row 			= $this->Cart_model->get_by_id_detail($id);
+    // Mengambil data item keranjang berdasarkan ID
+    $row = $this->Cart_model->get_by_id_detail($id);
 
-		if ($row) {
-			$id_transdet 			= $row->id_transdet;
+    if ($row) {
+        $id_transdet = $row->id_transdet;
 
-			$this->Cart_model->delete($id_transdet);
-			$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Booking Anda Berhasil dihapus</div>');
-			redirect(site_url('cart'));
-		}
-		// Jika data tidak ada
-		else {
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert">Booking tidak ditemukan</div>');
-			redirect(site_url('cart'));
-		}
-	}
+        // Menghapus item dari database
+        $this->Cart_model->delete($id_transdet);
+
+        // Menampilkan pesan berhasil
+        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Booking Anda Berhasil dihapus</div>');
+        redirect(site_url('cart'));
+    } else {
+        // Menampilkan pesan jika data tidak ditemukan
+        $this->session->set_flashdata('message', '<div class="alert alert-warning alert">Booking tidak ditemukan</div>');
+        redirect(site_url('cart'));
+    }
+}
+
 
 	public function empty_cart($id_trans)
 	{

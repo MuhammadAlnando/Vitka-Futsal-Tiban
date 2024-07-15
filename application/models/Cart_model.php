@@ -240,11 +240,25 @@ class Cart_model extends CI_Model
   }
 
   // delete data
-  function delete($id)
-  {
+  public function delete($id)
+{
+    // Ensure that $id is valid
+    if (empty($id) || !is_numeric($id)) {
+        return false; // Invalid ID
+    }
+
+    // Specify the condition for deletion
     $this->db->where('id_transdet', $id);
-    $this->db->delete($this->table2);
-  }
+    $this->session->unset_userdata('cart_items');
+
+    // Execute the delete query
+    if ($this->db->delete($this->table2)) {
+        return true; // Deletion successful
+    } else {
+        return false; // Deletion failed
+    }
+}
+
 
   function kosongkan_cart($id_trans)
   {

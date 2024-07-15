@@ -31,18 +31,25 @@
                                     foreach ($cart_data as $cart) { ?>
                                         <tr>
                                             <td style="text-align:left"><?php echo $cart->nama_lapangan ?></td>
-                                            <td style="text-align:center" class="harga_per_jam"><?php echo number_format($cart->harga) ?></td>
+                                            <td style="text-align:left" class="harga_per_jam" 
+                                                data-harga-siang="<?php echo $cart->harga ?>"
+                                                data-harga-malam="<?php echo $cart->harga_malam ?>">
+                                                <span class="harga_siang"><?php echo number_format($cart->harga); ?> (Siang)</span><br>
+                                                <span class="harga_malam"><?php echo number_format($cart->harga_malam); ?> (18:00)</span>
+                                            </td>
                                             <td style="text-align:center">
                                                 <?php echo form_input($tanggal) ?>
-                                                <input type="hidden" name="harga_jual[]" value="<?php echo $cart->harga ?>">
+                                                <input type="hidden" name="harga_jual[]" value="<?php echo $cart->harga?>">
+                                                <input type="hidden" name="harga_jual[]" value="<?php echo $cart->harga_malam ?>">
                                                 <input type="hidden" name="lapangan[]" value="<?php echo $cart->lapangan_id ?>">
                                                 <input type="hidden" name="id_transdet[]" value="<?php echo $cart->id_transdet ?>">
                                                 <input type="hidden" value="<?php echo $cart->lapangan_id; ?>" class="lapangan_id">
                                             </td>
                                             <td style="text-align:center">
-                                                <?php echo form_dropdown('', array('' => '- Pilih Tanggal Dulu -'), '', $jam_mulai); ?>
+                                                <?php echo form_dropdown('jam_mulai[]', array('' => '- Pilih Tanggal Dulu -'), '', $jam_mulai); ?>
                                                 <span class="loading_container" style="display:none;">
-                                                    <img src="<?php echo base_url(); ?>assets/template/frontend/img/loading.gif" style="display:inline;" />&nbsp;memuat data ...</span>
+                                                    <img src="<?php echo base_url(); ?>assets/template/frontend/img/loading.gif" style="display:inline;" />&nbsp;memuat data ...
+                                                </span>
                                             </td>
                                             <td style="text-align:center">
                                                 <input type="number" name="durasi[]" class="durasi" min="1">
@@ -113,17 +120,18 @@
         <link href="<?php echo base_url('assets/plugins/') ?>datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
         <script src="<?php echo base_url('assets/plugins/') ?>datepicker/js/bootstrap-datepicker.js"></script>
         <script type="text/javascript">
-            const numberWithCommas = (x) => {
-                var parts = x.toString().split(".");
-                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return parts.join(".");
-            }
+           const numberWithCommas = (x) => {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
 
-			$(function() {
+
+$(function() {
     $(document).on("focus", ".tanggal", function() {
         $(this).datepicker({
             startDate: '0',
-            endDate: '+14d',  // Menambahkan batas maksimal dua minggu dari hari ini
+            endDate: '+14d',  // Batas maksimal dua minggu dari hari ini
             autoclose: true,
             todayHighlight: true,
             format: 'yyyy-mm-dd'
@@ -131,114 +139,111 @@
     });
 
     $('.tanggal').on('changeDate', function(ev) {
-    var tanggal_el = $(this);
-    var tanggal_val = $(this).val();
-    var jam_mulai_el = tanggal_el.parent().parent().find(".jam_mulai");
-    var durasi_el = tanggal_el.parent().parent().find(".durasi");
-    var jam_selesai_el = durasi_el.parent().parent().find(".jam_selesai");
-    var loading_container_el = tanggal_el.parent().parent().find(".loading_container");
-    var lapangan_id_el = tanggal_el.parent().parent().find(".lapangan_id");
-
-    jam_mulai_el.hide();
-    loading_container_el.show();
-
-    $.post('<?php echo base_url(); ?>Cart/getJamMulai', {
-            tanggal: tanggal_val,
-            lapangan_id: lapangan_id_el.val()
-        }, function(data) {
-            jam_mulai_el.show();
-            loading_container_el.hide();
-            jam_mulai_el.html("");
-
-            jam_mulai_el.append("<option value='' selected='selected'>- Pilih Jam Mulai -</option>");
-
-            var count = 0;
-            var now = moment(); // Jam saat ini
-
-            data.forEach(function(item, index) {
-                var jam_mulai = moment(item.jam_mulai, 'HH:mm:ss');
-
-                // Validasi untuk tanggal hari ini
-                if (tanggal_val === moment().format('YYYY-MM-DD')) {
-                    if (jam_mulai.isAfter(now)) {
-                        jam_mulai_el.append("<option durasi='" + item.durasi + "'>" + item.jam_mulai + "</option>");
-                        count++;
-                    }
-                } else {
-                    // Tidak ada validasi tambahan untuk tanggal hari esok
-                    jam_mulai_el.append("<option durasi='" + item.durasi + "'>" + item.jam_mulai + "</option>");
-                    count++;
-                }
-            });
-
-            durasi_el.val(0);
-            jam_selesai_el.html("");
-
-            if (count == 0) {
-                jam_mulai_el.html("");
-                jam_mulai_el.append("<option value='' selected='selected'>- Tidak ada pilihan -</option>");
-            }
-
-        },
-        'json'
-    );
-});
-
-
-
-    $(document).on("change", ".jam_mulai", function() {
-        var jam_mulai_el = $(this);
-        var durasi_el = jam_mulai_el.parent().parent().find(".durasi");
-        durasi_el.val(jam_mulai_el.find(":selected").attr("durasi")).change();
-    });
-
-    $(document).on("change keyup", ".durasi", function() {
-        var durasi_el = $(this);
-        var durasi = $(this).val();
-
-        if (durasi == "") {
-            durasi = 0;
-            durasi_el.val(durasi);
-        }
-
-        var jam_mulai_el = durasi_el.parent().parent().find(".jam_mulai");
+        var tanggal_el = $(this);
+        var tanggal_val = tanggal_el.val();
+        var jam_mulai_el = tanggal_el.parent().parent().find(".jam_mulai");
+        var durasi_el = tanggal_el.parent().parent().find(".durasi");
         var jam_selesai_el = durasi_el.parent().parent().find(".jam_selesai");
+        var loading_container_el = tanggal_el.parent().parent().find(".loading_container");
+        var lapangan_id_el = tanggal_el.parent().parent().find(".lapangan_id");
 
-        var harga_per_jam_el = durasi_el.parent().parent().find(".harga_per_jam");
-        var subtotal_el = durasi_el.parent().parent().find(".subtotal");
+        jam_mulai_el.hide();
+        loading_container_el.show();
 
-        if (jam_mulai_el.val() != "") {
-            var jam_selesai = moment("01-01-2018 " + jam_mulai_el.val(), "MM-DD-YYYY HH:mm:ss").add(parseInt(durasi), 'hours').format('HH:mm:ss');
-            jam_selesai_el.html(jam_selesai);
+        $.post('<?php echo base_url(); ?>Cart/getJamMulai', {
+    tanggal: tanggal_val,
+    lapangan_id: lapangan_id_el.val()
+}, function(data) {
+    jam_mulai_el.show();
+    loading_container_el.hide();
+    jam_mulai_el.html("");
 
-            var harga_per_jam = harga_per_jam_el.html().replace(/,/g, '');
-            var harga_per_jam_int = parseInt(harga_per_jam);
+    jam_mulai_el.append("<option value='' selected='selected'>- Pilih Jam Mulai -</option>");
 
-            subtotal_el.html(numberWithCommas(harga_per_jam_int * parseInt(durasi)));
+    var count = 0;
+    // Di dalam $.post
+var now = moment(); // Jam saat ini
+var weekday = moment(tanggal_val).isoWeekday(); // Mendapatkan hari dalam minggu (1 untuk Senin, 7 untuk Minggu)
 
-            var subtotal_bawah = 0;
-            $('.subtotal').each(function(i, obj) {
-                var a_subtotal_html = $(this).html().trim().replace(/,/g, '');
-                if (a_subtotal_html == "") {
-                    a_subtotal_html = "0";
+data.forEach(function(item, index) {
+    var jam_mulai = moment(item.jam_mulai, 'HH:mm:ss');
+
+    // Validasi untuk hari Senin - Kamis dari 15:00 hingga 21:00
+    if (weekday >= 1 && weekday <= 4) { // Senin - Kamis
+        if (jam_mulai.isAfter(now.startOf('day').add(14, 'hours')) && jam_mulai.isBefore(now.startOf('day').add(22, 'hours'))) {
+            jam_mulai_el.append("<option durasi='" + item.durasi + "'>" + item.jam_mulai + "</option>");
+            count++;
+        }
+    }
+    // Validasi untuk hari Jumat - Minggu dari 07:00 hingga 21:00
+    else if (weekday >= 5 && weekday <= 7) { // Jumat - Minggu
+        if (jam_mulai.isAfter(now.startOf('day').add(6, 'hours')) && jam_mulai.isBefore(now.startOf('day').add(22, 'hours'))) {
+            jam_mulai_el.append("<option durasi='" + item.durasi + "'>" + item.jam_mulai + "</option>");
+            count++;
+        }
+    }
+});
+
+
+    if (count == 0) {
+        jam_mulai_el.append("<option value=''>Jam penuh</option>");
+    }
+}, 'json');
+
+    });
+    $(document).on("change", ".jam_mulai", function() {
+    var durasi_el = $(this).closest("tr").find(".durasi");
+    durasi_el.val(1); // Set nilai durasi menjadi 1 secara otomatis
+});
+
+
+    $(document).on("change", ".jam_mulai, .durasi", function() {
+        var parentRow = $(this).closest("tr");
+        var jam_mulai_el = parentRow.find(".jam_mulai");
+        var jam_mulai_val = jam_mulai_el.val();
+        var durasi_el = parentRow.find(".durasi");
+        var durasi_val = durasi_el.val();
+
+        var jam_selesai_el = parentRow.find(".jam_selesai");
+        var subtotal_el = parentRow.find(".subtotal");
+        var harga_el = parentRow.find(".harga_per_jam");
+        var harga_siang_el = harga_el.find(".harga_siang");
+        var harga_malam_el = harga_el.find(".harga_malam");
+        var harga_siang = parseFloat(harga_el.data("harga-siang"));
+        var harga_malam = parseFloat(harga_el.data("harga-malam"));
+
+        if (jam_mulai_val && durasi_val) {
+            var jam_mulai_moment = moment(jam_mulai_val, 'HH:mm:ss');
+            var jam_selesai_moment = jam_mulai_moment.clone().add(durasi_val, 'hours');
+
+            var now = moment(); // Jam saat ini
+            var today = moment().startOf('day');
+
+            var total_harga = 0;
+            for (var i = 0; i < durasi_val; i++) {
+                var current_hour = jam_mulai_moment.clone().add(i, 'hours');
+                var current_hour_number = current_hour.hour();
+
+                if (current_hour_number >= 18 || current_hour_number < 7) {
+                    total_harga += harga_malam; // Gunakan harga malam setelah pukul 18:00
+                } else {
+                    total_harga += harga_siang; // Gunakan harga siang sebelum pukul 18:00
                 }
-
-                var a_subtotal_html_int = parseInt(a_subtotal_html);
-                subtotal_bawah += a_subtotal_html_int;
-            });
-
-            var diskon = 0; // Default diskon jika tidak ada nilai
-            if ($('#diskon').length) {
-                diskon = parseInt($('#diskon').val().replace(/,/g, '')) || 0;
             }
 
-            $("#subtotal_bawah").html(numberWithCommas(subtotal_bawah));
-            var gtotal = subtotal_bawah - diskon;
-            $("#grandtotal").html(numberWithCommas(gtotal));
+            jam_selesai_el.text(jam_selesai_moment.format('HH:mm:ss'));
+            subtotal_el.text(numberWithCommas(total_harga));
+            $('#subtotal_bawah').text(numberWithCommas(total_harga));
+
+            // Hitung grand total
+            var grand_total = total_harga;
+            $("#grandtotal").text(numberWithCommas(grand_total));
         }
     });
 });
+
         </script>
     </div>
 </div>
+
 <?php $this->load->view('front/footer'); ?>

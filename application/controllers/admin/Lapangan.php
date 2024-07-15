@@ -45,6 +45,15 @@ class Lapangan extends CI_Controller
       'required'    => '',
     );
 
+    $this->data['harga_malam'] = array(
+      'name'  => 'harga_malam',
+      'id'    => 'harga_malam',
+      'type'  => 'number',
+      'class' => 'form-control',
+      'value' => $this->form_validation->set_value('harga_malam'),
+      'required'    => '',
+  );
+
     $this->load->view('back/lapangan/lapangan_add', $this->data);
   }
 
@@ -101,6 +110,7 @@ class Lapangan extends CI_Controller
             $data = array(
               'nama_lapangan'   => $this->input->post('nama_lapangan'),
               'harga'           => $this->input->post('harga'),
+              'harga_malam' => $this->input->post('harga_malam'),
               'foto'            => $nmfile.$foto['file_ext'],
               'created_by'      => $this->session->userdata('username')
             );
@@ -166,6 +176,14 @@ class Lapangan extends CI_Controller
         'class' => 'form-control',
         'required'    => '',
       );
+      $this->data['harga_malam'] = array(
+        'name'  => 'harga_malam',
+        'id'    => 'harga_malam',
+        'type'  => 'number',
+        'class' => 'form-control',
+        'value' => $this->form_validation->set_value('harga_malam', $row->harga_malam),
+        'required'    => '',
+    );
 
       $this->load->view('back/lapangan/lapangan_edit', $this->data);
     }
@@ -243,6 +261,7 @@ class Lapangan extends CI_Controller
               $data = array(
                 'nama_lapangan'   => $this->input->post('nama_lapangan'),
                 'harga'           => $this->input->post('harga'),
+                'harga_malam'           => $this->input->post('harga_malam'),
                 'foto'            => $nmfile.$foto['file_ext'],
                 'modified_by'     => $this->session->userdata('username')
               );
@@ -261,6 +280,7 @@ class Lapangan extends CI_Controller
             $data = array(
               'nama_lapangan'   => $this->input->post('nama_lapangan'),
               'harga'           => $this->input->post('harga'),
+              'harga_malam'           => $this->input->post('harga_malam'),
               'modified_by'     => $this->session->userdata('username')
             );
 

@@ -10,7 +10,7 @@
 </div>	
 <div style="text-align: center; margin: 50px 0 50px 0">
 		<a href="<?php echo base_url('lapangan'); ?>"> <!-- Link to lapangan_view -->
-		<button class="btn btn-primary" style="background-color: #223C95; border: none;">Reservasi Sekarang</button>
+		<button class="btn btn-primary" style="background-color: #223C95; border: none;">Booking Sekarang</button>
 
 		</a>
 	</div>

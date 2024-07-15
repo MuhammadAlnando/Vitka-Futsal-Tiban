@@ -17,7 +17,7 @@
             <?php echo validation_errors() ?>
             <?php if($this->session->flashdata('message')){echo $this->session->flashdata('message');} ?>
             <?php echo form_open_multipart($action);?>
-  						<div class="box box-primary">
+              <div class="box box-primary">
                 <div class="box-body">
                   <div class="form-group"><label>Nama Lapangan</label>
                     <?php echo form_input($nama_lapangan, $lapangan->nama_lapangan);?>
@@ -25,8 +25,11 @@
                   <div class="form-group"><label>Harga Per Jam</label>
                     <?php echo form_input($harga, $lapangan->harga);?>
                   </div>
+                  <div class="form-group"><label>Harga Malam</label>
+                    <?php echo form_input($harga_malam, $lapangan->harga_malam);?>
+                  </div>
                   <div class="form-group"><label>Foto Sebelumnya</label><br>
-                    <img src="<?php echo base_url('assets/images/lapangan/'.$lapangan->foto.'') ?>" width="300px" class="img-responsive"/>
+                    <img src="<?php echo base_url('assets/images/lapangan/'.$lapangan->foto) ?>" width="300px" class="img-responsive"/>
                   </div>
                   <div class="form-group"><label>Foto Baru</label>
                     <input type="file" class="form-control" name="foto" id="foto" onchange="tampilkanPreview(this,'preview')"/>
@@ -36,10 +39,10 @@
                 </div>
                 <?php echo form_input($id_lapangan,$lapangan->id_lapangan);?>
                 <div class="box-footer">
-									<button type="submit" name="submit" class="btn btn-success"><?php echo $button_submit ?></button>
-									<button type="reset" name="reset" class="btn btn-danger"><?php echo $button_reset ?></button>
+                  <button type="submit" name="submit" class="btn btn-success"><?php echo $button_submit ?></button>
+                  <button type="reset" name="reset" class="btn btn-danger"><?php echo $button_reset ?></button>
                 </div>
-						  </div>
+              </div>
             <?php echo form_close(); ?>
           </div><!-- ./col -->
         </div><!-- /.row -->
