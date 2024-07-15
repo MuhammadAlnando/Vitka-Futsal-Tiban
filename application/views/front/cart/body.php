@@ -17,7 +17,8 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">Lapangan</th>
-                                        <th style="text-align: center">Harga</th>
+                                        <th style="text-align: center">Harga Siang</th>
+                                        <th style="text-align: center">Harga Malam</th>
                                         <th style="text-align: center">Tanggal</th>
                                         <th style="text-align: center">Jam Mulai</th>
                                         <th style="text-align: center">Durasi</th>
@@ -30,36 +31,33 @@
                                     <?php $no = 1;
                                     foreach ($cart_data as $cart) { ?>
                                         <tr>
-                                            <td style="text-align:left"><?php echo $cart->nama_lapangan ?></td>
-                                            <td style="text-align:left" class="harga_per_jam" 
-                                                data-harga-siang="<?php echo $cart->harga ?>"
-                                                data-harga-malam="<?php echo $cart->harga_malam ?>">
-                                                <span class="harga_siang"><?php echo number_format($cart->harga); ?> (Siang)</span><br>
-                                                <span class="harga_malam"><?php echo number_format($cart->harga_malam); ?> (18:00)</span>
-                                            </td>
-                                            <td style="text-align:center">
-                                                <?php echo form_input($tanggal) ?>
-                                                <input type="hidden" name="harga_jual[]" value="<?php echo $cart->harga?>">
-                                                <input type="hidden" name="harga_jual[]" value="<?php echo $cart->harga_malam ?>">
-                                                <input type="hidden" name="lapangan[]" value="<?php echo $cart->lapangan_id ?>">
-                                                <input type="hidden" name="id_transdet[]" value="<?php echo $cart->id_transdet ?>">
-                                                <input type="hidden" value="<?php echo $cart->lapangan_id; ?>" class="lapangan_id">
-                                            </td>
-                                            <td style="text-align:center">
-                                                <?php echo form_dropdown('jam_mulai[]', array('' => '- Pilih Tanggal Dulu -'), '', $jam_mulai); ?>
-                                                <span class="loading_container" style="display:none;">
-                                                    <img src="<?php echo base_url(); ?>assets/template/frontend/img/loading.gif" style="display:inline;" />&nbsp;memuat data ...
-                                                </span>
-                                            </td>
-                                            <td style="text-align:center">
-                                                <input type="number" name="durasi[]" class="durasi" min="1">
-                                            </td>
-                                            <td style="text-align:center" class="jam_selesai"></td>
-                                            <td style="text-align:center" class="subtotal"></td>
-                                            <td style="text-align:center">
-                                                <a href="<?php echo base_url('cart/delete/') . $cart->id_transdet ?>" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>
-                                            </td>
-                                        </tr>
+    <td style="text-align:left"><?php echo $cart->nama_lapangan ?></td>
+    <td style="text-align:center"><?php echo number_format($cart->harga); ?></td>
+    <td style="text-align:center"><?php echo number_format($cart->harga_malam); ?></td>
+    <td style="text-align:center">
+        <?php echo form_input($tanggal) ?>
+        <input type="hidden" name="harga_siang[]" value="<?php echo $cart->harga ?>">
+        <input type="hidden" name="harga_malam[]" value="<?php echo $cart->harga_malam ?>">
+        <input type="hidden" name="lapangan[]" value="<?php echo $cart->lapangan_id ?>">
+        <input type="hidden" name="id_transdet[]" value="<?php echo $cart->id_transdet ?>">
+        <input type="hidden" value="<?php echo $cart->lapangan_id; ?>" class="lapangan_id">
+    </td>
+    <td style="text-align:center">
+        <?php echo form_dropdown('jam_mulai[]', array('' => '- Pilih Tanggal Dulu -'), '', 'class="jam_mulai"'); ?>
+        <span class="loading_container" style="display:none;">
+            <img src="<?php echo base_url(); ?>assets/template/frontend/img/loading.gif" style="display:inline;" />&nbsp;memuat data ...
+        </span>
+    </td>
+    <td style="text-align:center">
+        <input type="number" name="durasi[]" class="durasi" min="1">
+    </td>
+    <td style="text-align:center" class="jam_selesai"></td>
+    <td style="text-align:center" class="subtotal"></td>
+    <td style="text-align:center">
+        <a href="<?php echo base_url('cart/delete/') . $cart->id_transdet ?>" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>
+    </td>
+</tr>
+
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -196,50 +194,61 @@ data.forEach(function(item, index) {
     durasi_el.val(1); // Set nilai durasi menjadi 1 secara otomatis
 });
 
+$(document).on("change", ".harga_selector", function() {
+    var parentRow = $(this).closest("tr");
+    var harga_siang = parseFloat(parentRow.find(".harga_siang").text());
+    var harga_malam = parseFloat(parentRow.find(".harga_malam").text());
 
-    $(document).on("change", ".jam_mulai, .durasi", function() {
-        var parentRow = $(this).closest("tr");
-        var jam_mulai_el = parentRow.find(".jam_mulai");
-        var jam_mulai_val = jam_mulai_el.val();
-        var durasi_el = parentRow.find(".durasi");
-        var durasi_val = durasi_el.val();
+    var selected_value = $(this).val();
+    if (selected_value === 'siang') {
+        parentRow.find(".input_harga").val(harga_siang);
+    } else if (selected_value === 'malam') {
+        parentRow.find(".input_harga").val(harga_malam);
+    }
+});
 
-        var jam_selesai_el = parentRow.find(".jam_selesai");
-        var subtotal_el = parentRow.find(".subtotal");
-        var harga_el = parentRow.find(".harga_per_jam");
-        var harga_siang_el = harga_el.find(".harga_siang");
-        var harga_malam_el = harga_el.find(".harga_malam");
-        var harga_siang = parseFloat(harga_el.data("harga-siang"));
-        var harga_malam = parseFloat(harga_el.data("harga-malam"));
 
-        if (jam_mulai_val && durasi_val) {
-            var jam_mulai_moment = moment(jam_mulai_val, 'HH:mm:ss');
-            var jam_selesai_moment = jam_mulai_moment.clone().add(durasi_val, 'hours');
 
-            var now = moment(); // Jam saat ini
-            var today = moment().startOf('day');
+$(document).on("change", ".jam_mulai, .durasi", function() {
+    var parentRow = $(this).closest("tr");
+    var jam_mulai_val = parentRow.find(".jam_mulai").val();
+    var durasi_val = parentRow.find(".durasi").val();
+    var harga_siang = parseFloat(parentRow.find("input[name='harga_siang[]']").val());
+    var harga_malam = parseFloat(parentRow.find("input[name='harga_malam[]']").val());
 
-            var total_harga = 0;
-            for (var i = 0; i < durasi_val; i++) {
-                var current_hour = jam_mulai_moment.clone().add(i, 'hours');
-                var current_hour_number = current_hour.hour();
+    if (isNaN(harga_siang)) {
+        harga_siang = 0;
+    }
+    if (isNaN(harga_malam)) {
+        harga_malam = 0;
+    }
 
-                if (current_hour_number >= 18 || current_hour_number < 7) {
-                    total_harga += harga_malam; // Gunakan harga malam setelah pukul 18:00
-                } else {
-                    total_harga += harga_siang; // Gunakan harga siang sebelum pukul 18:00
-                }
+    if (jam_mulai_val && durasi_val) {
+        var jam_mulai_moment = moment(jam_mulai_val, 'HH:mm:ss');
+        var jam_selesai_moment = jam_mulai_moment.clone().add(durasi_val, 'hours');
+
+        parentRow.find(".jam_selesai").text(jam_selesai_moment.format('HH:mm:ss'));
+
+        var total_harga = 0;
+        for (var i = 0; i < durasi_val; i++) {
+            var current_hour = moment(jam_mulai_val, 'HH:mm:ss').add(i, 'hours');
+            var current_hour_number = current_hour.hour();
+
+            if (current_hour_number >= 18 || current_hour_number < 7) {
+                total_harga += harga_malam; // Gunakan harga malam setelah pukul 18:00
+            } else {
+                total_harga += harga_siang; // Gunakan harga siang sebelum pukul 18:00
             }
-
-            jam_selesai_el.text(jam_selesai_moment.format('HH:mm:ss'));
-            subtotal_el.text(numberWithCommas(total_harga));
-            $('#subtotal_bawah').text(numberWithCommas(total_harga));
-
-            // Hitung grand total
-            var grand_total = total_harga;
-            $("#grandtotal").text(numberWithCommas(grand_total));
         }
-    });
+
+        parentRow.find(".subtotal").text(numberWithCommas(total_harga));
+        $('#subtotal_bawah').text(numberWithCommas(total_harga));
+
+        var grand_total = total_harga;
+        $("#grandtotal").text(numberWithCommas(grand_total));
+    }
+});
+
 });
 
         </script>

@@ -190,44 +190,61 @@ redirect(site_url('cart'));
 	}
 
 	public function checkout()
-	{
-		$count = count($this->input->post('lapangan'));
-		for ($i = 0; $i < $count; $i++) {
-			$data_detail[$i] = array(
-				'id_transdet'   => $this->input->post('id_transdet[' . $i . ']'),
-				'tanggal'       => $this->input->post('tanggal[' . $i . ']'),
-				'jam_mulai'     => $this->input->post('jam_mulai[' . $i . ']'),
-				'durasi'        => $this->input->post('durasi[' . $i . ']'),
-				'harga_jual'    => $this->input->post('harga_jual[' . $i . ']'),
-				'jam_selesai'   => $this->input->post('jam_mulai[' . $i . ']') + $this->input->post('durasi[' . $i . ']') . ":00:00",
-				'total'   			=> $this->input->post('harga_jual[' . $i . ']') * $this->input->post('durasi[' . $i . ']'),
-			);
+{
+    $lapangan = $this->input->post('lapangan'); // Sesuaikan dengan nama input yang benar
 
-			$this->db->update_batch('transaksi_detail', $data_detail, 'id_transdet');
+    $count = count($lapangan);
+    for ($i = 0; $i < $count; $i++) {
+		// Ambil nilai harga_siang dan harga_malam berdasarkan pilihan jam
+		$jam_mulai = $this->input->post('jam_mulai[' . $i . ']');
+		$harga_siang = 0;
+		$harga_malam = 0;
+	
+		if ($jam_mulai >= '18:00:00' && $jam_mulai < '22:00:00') {
+			$harga_malam = $this->input->post('harga_malam[' . $i . ']');
+		} elseif ($jam_mulai >= '07:00:00' && $jam_mulai < '17:00:00') {
+			$harga_siang = $this->input->post('harga_siang[' . $i . ']');
 		}
-
-		
-		$this->db->select_sum('total');
-		$this->db->join('transaksi_detail', 'transaksi.id_trans = transaksi_detail.trans_id');
-		$this->db->where('id_trans', $this->input->post('id_trans'));
-		$this->db->where('user_id', $this->session->userdata('user_id'));
-		$query = $this->db->get('transaksi')->row();
-
-		$gtotal = $query->total;
-
-		$this->db->where('id_trans', $this->input->post('id_trans'));
-		$this->db->where('user_id', $this->session->userdata('user_id'));
-		$this->db->update('transaksi', array(
-			'subtotal'		=>	$query->total,
-			
-			'grand_total'	=>	$gtotal,
-			'deadline'		=>	date('Y-m-d H:i:s', strtotime('1 hour')),
-			'catatan'     => $this->input->post('catatan'),
-			'status'			=>	'1',
-		));
-
-		redirect(site_url('cart/finished'));
+	
+		$data_detail[$i] = array(
+			'id_transdet'   => $this->input->post('id_transdet[' . $i . ']'),
+			'tanggal'       => $this->input->post('tanggal[' . $i . ']'),
+			'jam_mulai'     => $jam_mulai,
+			'durasi'        => $this->input->post('durasi[' . $i . ']'),
+			'harga_jual'    => $harga_siang + $harga_malam, // Harga total berdasarkan pilihan jam
+			'harga_siang'   => $harga_siang, // Harga siang
+			'harga_malam'   => $harga_malam, // Harga malam
+			'jam_selesai'   => date('H:i:s', strtotime($jam_mulai . '+ ' . $this->input->post('durasi[' . $i . ']') . ' hours')),
+			'total'         => ($harga_siang * $this->input->post('durasi[' . $i . ']')) + ($harga_malam * $this->input->post('durasi[' . $i . ']')), // Hitung total berdasarkan harga_siang dan harga_malam
+		);
+	
+		// Update transaksi_detail sesuai dengan $data_detail
+		$this->db->update_batch('transaksi_detail', $data_detail, 'id_transdet');
 	}
+	
+
+    // Hitung subtotal
+    $this->db->select_sum('total');
+    $this->db->join('transaksi_detail', 'transaksi.id_trans = transaksi_detail.trans_id');
+    $this->db->where('id_trans', $this->input->post('id_trans'));
+    $this->db->where('user_id', $this->session->userdata('user_id'));
+    $query = $this->db->get('transaksi')->row();
+    $subtotal = $query->total;
+
+    // Update grand total dan data transaksi lainnya
+    $this->db->where('id_trans', $this->input->post('id_trans'));
+    $this->db->where('user_id', $this->session->userdata('user_id'));
+    $this->db->update('transaksi', array(
+        'subtotal'      => $subtotal,
+        'grand_total'   => $subtotal,
+        'deadline'      => date('Y-m-d H:i:s', strtotime('+1 hour')),
+        'catatan'       => $this->input->post('catatan'),
+        'status'        => '1',
+    ));
+
+    redirect(site_url('cart/finished'));
+}
+
 
 	public function finished()
 	{
