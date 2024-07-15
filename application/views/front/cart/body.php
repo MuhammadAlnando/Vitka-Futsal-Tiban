@@ -232,6 +232,14 @@ $(document).on("change", ".jam_mulai, .durasi", function() {
         var jam_mulai_moment = moment(jam_mulai_val, 'HH:mm:ss');
         var jam_selesai_moment = jam_mulai_moment.clone().add(durasi_val, 'hours');
 
+        // Batasi jam selesai maksimal pukul 22:00
+        if (jam_selesai_moment.hour() >= 22) {
+            jam_selesai_moment.hour(22).minute(0).second(0);
+
+            // Tampilkan notifikasi peringatan
+            alert("Jam selesai tidak boleh melewati pukul 22:00. Silakan atur ulang jam mulai atau durasi.");
+        }
+
         parentRow.find(".jam_selesai").text(jam_selesai_moment.format('HH:mm:ss'));
 
         var total_harga = 0;
@@ -261,6 +269,7 @@ $(document).on("change", ".jam_mulai, .durasi", function() {
         $("#total_diskon").text(numberWithCommas(total_diskon_siang));
     }
 });
+
 
 });
 
