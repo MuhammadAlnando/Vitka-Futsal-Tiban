@@ -67,6 +67,11 @@
 
                 <table class="table table-striped table-bordered">
                     <tbody>
+                    <tr>
+    <th>Diskon</th>
+    <td align="center">Rp</td>
+    <td align="right" id="total_diskon">0</td>
+</tr>
                         <tr>
                             <th>SubTotal</th>
                             <td align="center">Rp</td>
@@ -230,22 +235,30 @@ $(document).on("change", ".jam_mulai, .durasi", function() {
         parentRow.find(".jam_selesai").text(jam_selesai_moment.format('HH:mm:ss'));
 
         var total_harga = 0;
+        var total_diskon_siang = 0;
+
         for (var i = 0; i < durasi_val; i++) {
             var current_hour = moment(jam_mulai_val, 'HH:mm:ss').add(i, 'hours');
             var current_hour_number = current_hour.hour();
 
             if (current_hour_number >= 18 || current_hour_number < 7) {
-                total_harga += harga_malam; // Gunakan harga malam setelah pukul 18:00
+                total_harga += harga_malam;
             } else {
-                total_harga += harga_siang; // Gunakan harga siang sebelum pukul 18:00
+                total_harga += harga_siang;
+
+                // Diskon hanya untuk harga siang
+                var diskon_siang = harga_siang * 0.5; // 50% diskon
+                total_diskon_siang += diskon_siang;
             }
         }
 
         parentRow.find(".subtotal").text(numberWithCommas(total_harga));
         $('#subtotal_bawah').text(numberWithCommas(total_harga));
 
-        var grand_total = total_harga;
+        var grand_total = total_harga - total_diskon_siang;
         $("#grandtotal").text(numberWithCommas(grand_total));
+
+        $("#total_diskon").text(numberWithCommas(total_diskon_siang));
     }
 });
 

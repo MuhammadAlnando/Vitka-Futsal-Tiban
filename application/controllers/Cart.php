@@ -195,33 +195,50 @@ redirect(site_url('cart'));
 
     $count = count($lapangan);
     for ($i = 0; $i < $count; $i++) {
-		// Ambil nilai harga_siang dan harga_malam berdasarkan pilihan jam
-		$jam_mulai = $this->input->post('jam_mulai[' . $i . ']');
-		$harga_siang = 0;
-		$harga_malam = 0;
-	
-		if ($jam_mulai >= '18:00:00' && $jam_mulai < '22:00:00') {
-			$harga_malam = $this->input->post('harga_malam[' . $i . ']');
-		} elseif ($jam_mulai >= '07:00:00' && $jam_mulai < '17:00:00') {
-			$harga_siang = $this->input->post('harga_siang[' . $i . ']');
-		}
-	
-		$data_detail[$i] = array(
-			'id_transdet'   => $this->input->post('id_transdet[' . $i . ']'),
-			'tanggal'       => $this->input->post('tanggal[' . $i . ']'),
-			'jam_mulai'     => $jam_mulai,
-			'durasi'        => $this->input->post('durasi[' . $i . ']'),
-			'harga_jual'    => $harga_siang + $harga_malam, // Harga total berdasarkan pilihan jam
-			'harga_siang'   => $harga_siang, // Harga siang
-			'harga_malam'   => $harga_malam, // Harga malam
-			'jam_selesai'   => date('H:i:s', strtotime($jam_mulai . '+ ' . $this->input->post('durasi[' . $i . ']') . ' hours')),
-			'total'         => ($harga_siang * $this->input->post('durasi[' . $i . ']')) + ($harga_malam * $this->input->post('durasi[' . $i . ']')), // Hitung total berdasarkan harga_siang dan harga_malam
-		);
-	
-		// Update transaksi_detail sesuai dengan $data_detail
-		$this->db->update_batch('transaksi_detail', $data_detail, 'id_transdet');
-	}
-	
+        // Ambil nilai jam_mulai, durasi, harga_siang, dan harga_malam
+        $jam_mulai = $this->input->post('jam_mulai[' . $i . ']');
+        $durasi = $this->input->post('durasi[' . $i . ']');
+        $harga_siang = $this->input->post('harga_siang[' . $i . ']');
+        $harga_malam = $this->input->post('harga_malam[' . $i . ']');
+
+        // Terapkan diskon 50% pada harga siang
+        $harga_siang = $harga_siang * 0.5;
+
+        // Inisialisasi total harga siang dan malam
+        $total_harga_siang = 0;
+        $total_harga_malam = 0;
+
+        // Hitung durasi dalam harga siang dan harga malam
+        for ($j = 0; $j < $durasi; $j++) {
+            $jam_current = date('H:i:s', strtotime($jam_mulai . ' + ' . $j . ' hours'));
+
+            if ($jam_current >= '17:00:00' && $jam_current < '18:00:00') {
+                // Perhitungan spesifik untuk jam 17:00 - 18:00
+                $total_harga_siang += $harga_siang;
+            } elseif ($jam_current >= '18:00:00' && $jam_current < '22:00:00') {
+                $total_harga_malam += $harga_malam;
+            } elseif ($jam_current >= '07:00:00' && $jam_current < '17:00:00') {
+                $total_harga_siang += $harga_siang;
+            }
+        }
+
+        $total_harga = $total_harga_siang + $total_harga_malam;
+
+        $data_detail[$i] = array(
+            'id_transdet'   => $this->input->post('id_transdet[' . $i . ']'),
+            'tanggal'       => $this->input->post('tanggal[' . $i . ']'),
+            'jam_mulai'     => $jam_mulai,
+            'durasi'        => $durasi,
+            'harga_jual'    => $total_harga,
+            'harga_siang'   => $total_harga_siang,
+            'harga_malam'   => $total_harga_malam,
+            'jam_selesai'   => date('H:i:s', strtotime($jam_mulai . ' + ' . $durasi . ' hours')),
+            'total'         => $total_harga,
+        );
+
+        // Update transaksi_detail sesuai dengan $data_detail
+        $this->db->update_batch('transaksi_detail', $data_detail, 'id_transdet');
+    }
 
     // Hitung subtotal
     $this->db->select_sum('total');
@@ -244,6 +261,7 @@ redirect(site_url('cart'));
 
     redirect(site_url('cart/finished'));
 }
+
 
 
 	public function finished()
