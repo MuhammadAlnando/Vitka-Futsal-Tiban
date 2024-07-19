@@ -58,8 +58,7 @@ class Kontak extends CI_Controller
         $data = array(
           'nama_kontak'   => $this->input->post('nama_kontak'),
           'nohp'          => $this->input->post('nohp'),
-          'created_by'    => $this->session->userdata('username'),
-        );
+           );
 
         // eksekusi query INSERT
         $this->Kontak_model->insert($data);
@@ -127,8 +126,7 @@ class Kontak extends CI_Controller
         $data = array(
           'nama_kontak'   => $this->input->post('nama_kontak'),
           'nohp'          => $this->input->post('nohp'),
-          'modified_by'   => $this->session->userdata('username'),
-        );
+         );
 
         $this->Kontak_model->update($this->input->post('id_kontak'), $data);
         $this->session->set_flashdata('message', '

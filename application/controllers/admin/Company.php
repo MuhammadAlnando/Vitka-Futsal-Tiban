@@ -150,8 +150,7 @@ class Company extends CI_Controller
               'company_fax'       => $this->input->post('company_fax'),
                 'foto'              => $nmfile,
                 'foto_type'         => $foto['file_ext'],
-                'modified_by'       => $this->session->userdata('username')
-              );
+               );
 
               $this->Company_model->update($this->input->post('id_company'), $data);
               $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Edit Data Berhasil</div>');
@@ -167,7 +166,6 @@ class Company extends CI_Controller
               'company_address'   => $this->input->post('company_address'),
               'company_email'     => $this->input->post('company_email'),
             'company_fax'       => $this->input->post('company_fax'),
-              'modified_by'      => $this->session->userdata('username')
             );
 
             $this->Company_model->update($this->input->post('id_company'), $data);

@@ -109,8 +109,7 @@ class Slider extends CI_Controller
               'link'          => $this->input->post('link'),
               'foto'          => $nmfile,
               'foto_type'     => $foto['file_ext'],
-              'uploader'      => $this->session->userdata('username')
-            );
+              );
 
             // eksekusi query INSERT
             $this->Slider_model->insert($data);
@@ -125,7 +124,6 @@ class Slider extends CI_Controller
           'no_urut'   => $this->input->post('no_urut'),
           'nama_slider'  => $this->input->post('nama_slider'),
           'link'      => $this->input->post('link'),
-          'uploader'  => $this->session->userdata('username')
         );
 
         // eksekusi query INSERT
@@ -257,8 +255,7 @@ class Slider extends CI_Controller
               'link'        => $this->input->post('link'),
               'foto'        => $nmfile,
               'foto_type'   => $foto['file_ext'],
-              'modified_by' => $this->session->userdata('username')
-            );
+           );
 
             $this->Slider_model->update($this->input->post('id_slider'), $data);
             $this->session->set_flashdata('message', '
@@ -275,7 +272,6 @@ class Slider extends CI_Controller
             'no_urut'     => $this->input->post('no_urut'),
             'nama_slider'  => $this->input->post('nama_slider'),
             'link'        => $this->input->post('link'),
-            'modified_by' => $this->session->userdata('username')
           );
 
           $this->Slider_model->update($this->input->post('id_slider'), $data);

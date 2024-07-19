@@ -114,8 +114,7 @@ class Event extends CI_Controller
               'kategori'      => $this->input->post('kat_id'),
               'foto'          => $nmfile,
               'foto_type'     => $foto['file_ext'],
-              'created_by'    => $this->session->userdata('username')
-            );
+               );
 
             // eksekusi query INSERT
             $this->Event_model->insert($data);
@@ -134,8 +133,7 @@ class Event extends CI_Controller
           'slug_event'     => strtolower(url_title($this->input->post('nama_event'))),
           'deskripsi'      => $this->input->post('deskripsi'),
           'kategori'      => $this->input->post('kat_id'),
-          'created_by'      => $this->session->userdata('username')
-        );
+         );
 
         // eksekusi query INSERT
         $this->Event_model->insert($data);
@@ -273,8 +271,7 @@ class Event extends CI_Controller
                 'kategori'    => $this->input->post('kat_id'),
                 'foto'        => $nmfile,
                 'foto_type'   => $foto['file_ext'],
-                'modified_by' => $this->session->userdata('username')
-              );
+            );
 
               $this->Event_model->update($this->input->post('id_event'), $data);
               $this->session->set_flashdata('message', '
@@ -292,7 +289,6 @@ class Event extends CI_Controller
               'slug_event'   => strtolower(url_title($this->input->post('nama_event'))),
               'deskripsi'    => $this->input->post('deskripsi'),
               'kategori'    => $this->input->post('kat_id'),
-              'modified_by' => $this->session->userdata('username')
             );
 
             $this->Event_model->update($this->input->post('id_event'), $data);

@@ -16,8 +16,7 @@
           </a>
           <div class="card-body">
             <h5 class="card-title"><a href="<?php echo base_url("event/$event->slug_event") ?>" style="color: black;"><?php echo character_limiter($event->nama_event, 100) ?></a></h5>
-            <p><i class="fa fa-calendar"></i> <?php echo date("j F Y", strtotime($event->created_at)); ?></p>
-            <p>
+          <p>
               <?php 
               $deskripsi = strip_tags($event->deskripsi);
               if (strlen($deskripsi) > 100) {

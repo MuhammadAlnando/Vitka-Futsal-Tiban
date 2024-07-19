@@ -112,8 +112,7 @@ class Lapangan extends CI_Controller
               'harga'           => $this->input->post('harga'),
               'harga_malam' => $this->input->post('harga_malam'),
               'foto'            => $nmfile.$foto['file_ext'],
-              'created_by'      => $this->session->userdata('username')
-            );
+             );
 
             // eksekusi query INSERT
             $this->Lapangan_model->insert($data);
@@ -130,7 +129,6 @@ class Lapangan extends CI_Controller
         $data = array(
           'nama_lapangan'   => $this->input->post('nama_lapangan'),
           'harga'           => $this->input->post('harga'),
-          'created_by'      => $this->session->userdata('username')
         );
 
         // eksekusi query INSERT
@@ -263,7 +261,6 @@ class Lapangan extends CI_Controller
                 'harga'           => $this->input->post('harga'),
                 'harga_malam'           => $this->input->post('harga_malam'),
                 'foto'            => $nmfile.$foto['file_ext'],
-                'modified_by'     => $this->session->userdata('username')
               );
 
               $this->Lapangan_model->update($this->input->post('id_lapangan'), $data);
@@ -281,8 +278,7 @@ class Lapangan extends CI_Controller
               'nama_lapangan'   => $this->input->post('nama_lapangan'),
               'harga'           => $this->input->post('harga'),
               'harga_malam'           => $this->input->post('harga_malam'),
-              'modified_by'     => $this->session->userdata('username')
-            );
+          );
 
             $this->Lapangan_model->update($this->input->post('id_lapangan'), $data);
             $this->session->set_flashdata('message', '

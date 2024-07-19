@@ -34,7 +34,7 @@
                             <?php endif; ?>
                             <div class="card-body">
                                 <h5 class="card-title"><a href="<?php echo base_url('event/').$event->slug_event ?>" style="color: black;"><?php echo $event->nama_event ?></a></h5>
-                                <p class="card-text"><i class="fa fa-calendar"></i> <?php echo date("j F Y", strtotime($event->created_at)); ?></p>
+                              
                                 <p class="card-text">
                                     <?php 
                                     $deskripsi = strip_tags($event->deskripsi);

@@ -9,7 +9,6 @@
                 <img src="<?php echo base_url('assets/images/event/').$event_detail->foto.'_thumb'.$event_detail->foto_type ?>" alt="<?php echo $event_detail->nama_event ?>" class="img-responsive" style="width: 100%; height: auto;">
             </a>
 
-            <p><i class="fa fa-calendar"></i> <?php echo date("j F Y", strtotime($event_detail->created_at)); ?></p>
             <p><?php echo $event_detail->deskripsi ?></p>
             
         </div>

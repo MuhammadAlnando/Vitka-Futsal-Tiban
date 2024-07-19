@@ -447,8 +447,7 @@ class Auth extends CI_Controller
 						'usertype'  	=> $this->input->post('usertype'),
 						'address'  		=> $this->input->post('address'),
 						'phone'     	=> $this->input->post('phone'),
-						'photo'       => $nmfile,
-						'photo_type'  => $photo['file_ext'],
+					
 						'uploader'    => $this->session->userdata('user_id')
 					);
 

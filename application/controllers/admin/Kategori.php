@@ -57,8 +57,7 @@ class Kategori extends CI_Controller
         $data = array(
           'nama_kategori'   => $this->input->post('nama_kategori'),
           'slug_kat'        => strtolower(url_title($this->input->post('nama_kategori'))),
-          'created_by'      => $this->session->userdata('username'),
-        );
+         );
 
         // eksekusi query INSERT
         $this->Kategori_model->insert($data);
@@ -115,8 +114,7 @@ class Kategori extends CI_Controller
         $data = array(
           'nama_kategori'   => $this->input->post('nama_kategori'),
           'slug_kat'        => strtolower(url_title($this->input->post('nama_kategori'))),
-          'modified_by'     => $this->session->userdata('username'),
-        );
+    );
 
         $this->Kategori_model->update($this->input->post('id_kategori'), $data);
         $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Edit Data Berhasil</div>');
