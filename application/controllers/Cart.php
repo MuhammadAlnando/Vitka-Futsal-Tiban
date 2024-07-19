@@ -168,11 +168,11 @@ redirect(site_url('cart'));
         $this->Cart_model->delete($id_transdet);
 
         // Menampilkan pesan berhasil
-        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Booking Anda Berhasil dihapus</div>');
+        $this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Sewa Anda Berhasil dihapus</div>');
         redirect(site_url('cart'));
     } else {
         // Menampilkan pesan jika data tidak ditemukan
-        $this->session->set_flashdata('message', '<div class="alert alert-warning alert">Booking tidak ditemukan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-warning alert">Sewa tidak ditemukan</div>');
         redirect(site_url('cart'));
     }
 }
@@ -261,6 +261,7 @@ redirect(site_url('cart'));
 
     redirect(site_url('cart/finished'));
 }
+
 
 
 
@@ -441,6 +442,7 @@ redirect(site_url('cart'));
             redirect('cart/history');
         }
     }
+	
 	
 	
 }

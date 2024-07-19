@@ -58,19 +58,7 @@ class Company extends CI_Controller
         'rows'  => '2',
       );
 
-      $this->data['company_phone'] = array(
-        'name'  => 'company_phone',
-        'id'    => 'company_phone',
-        'class' => 'form-control',
-        'type'  => 'number',
-      );
-
-      $this->data['company_phone2'] = array(
-        'name'  => 'company_phone2',
-        'id'    => 'company_phone',
-        'class' => 'form-control',
-        'type'  => 'number',
-      );
+     
 
       $this->data['company_fax'] = array(
         'name'  => 'company_fax',
@@ -159,9 +147,7 @@ class Company extends CI_Controller
                 'company_desc'      => $this->input->post('company_desc'),
                 'company_address'   => $this->input->post('company_address'),
                 'company_email'     => $this->input->post('company_email'),
-                'company_phone'     => $this->input->post('company_phone'),
-                'company_phone2'    => $this->input->post('company_phone2'),
-                'company_fax'       => $this->input->post('company_fax'),
+              'company_fax'       => $this->input->post('company_fax'),
                 'foto'              => $nmfile,
                 'foto_type'         => $foto['file_ext'],
                 'modified_by'       => $this->session->userdata('username')
@@ -180,9 +166,7 @@ class Company extends CI_Controller
               'company_desc'      => $this->input->post('company_desc'),
               'company_address'   => $this->input->post('company_address'),
               'company_email'     => $this->input->post('company_email'),
-              'company_phone'     => $this->input->post('company_phone'),
-              'company_phone2'    => $this->input->post('company_phone2'),
-              'company_fax'       => $this->input->post('company_fax'),
+            'company_fax'       => $this->input->post('company_fax'),
               'modified_by'      => $this->session->userdata('username')
             );
 
@@ -197,9 +181,7 @@ class Company extends CI_Controller
   {
     $this->form_validation->set_rules('company_name', 'Nama Perusahaan/ Organisasi', 'trim|required');
     $this->form_validation->set_rules('company_email', 'Email', 'required|valid_email');
-    $this->form_validation->set_rules('company_phone', 'No. HP', 'numeric');
-    $this->form_validation->set_rules('company_phone2', 'Telpon', 'numeric');
-
+   
     // set pesan form validasi error
     $this->form_validation->set_message('required', '{field} wajib diisi');
     $this->form_validation->set_message('valid_email', '{field} wajib diisi');

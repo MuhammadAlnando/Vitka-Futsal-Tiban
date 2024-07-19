@@ -10,6 +10,7 @@
       </section>
       <!-- Main content -->
       <?php $this->load->view('back/record'); ?>
+      <?php $this->load->view('back/stats'); ?>
     </div><!-- /.content-wrapper -->
     <?php $this->load->view('back/footer') ?>
   </div><!-- ./wrapper -->

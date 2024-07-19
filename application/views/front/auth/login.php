@@ -10,7 +10,7 @@
                     <img src="<?php echo base_url('assets/images/company/') . $company_data->foto . $company_data->foto_type ?>" alt="<?php echo $company_data->company_name ?>" class="align-self-center" style="margin-top:14rem; width: 100%; max-width: 400px;">
                 </div>
                 <div class="col-lg-6 order-lg-1">
-                    <h2>LOGIN</h2>
+                    <h2>MASUK</h2>
                     <p>Belum punya akun? Silahkan Register <a href="<?php echo base_url('auth/register') ?>">disini</a></p>
                     <hr><?php echo $message;?>
                     <?php echo form_open("auth/login");?>
@@ -20,15 +20,15 @@
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
                         <div class="form-group has-feedback">
-                            <label>Password</label>
+                            <label>Kata Sandi</label>
                             <?php echo form_password($password); ?>
                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
                         <p><?php echo $captcha ?></p>
-                        <a href="#" data-toggle="modal" data-target="#pswreset" style="color: #223C95;">Lupa Password?</a>
+                        <!-- <a href="#" data-toggle="modal" data-target="#pswreset" style="color: #223C95;">Lupa Password?</a> -->
                         <hr>
                         <div class="form-group">
-    <button type="submit" name="submit" class="btn btn-primary" style="background-color: #223C95; border: none; width: 100%;">Login</button>
+    <button type="submit" name="submit" class="btn btn-primary" style="background-color: #223C95; border: none; width: 100%;">Masuk</button>
 </div>
 
     <?php echo form_close();?>

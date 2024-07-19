@@ -56,6 +56,12 @@ class Kontak_model extends CI_Model
 		return $query->result();
 	}
 
+	public function get_kontak_by_id($id) {
+        $this->db->where('id_kontak', $id);
+        $query = $this->db->get('kontak');
+        return $query->result(); // Return all rows as an array of objects
+    }
+
   function count_filtered()
 	{
 		$this->_get_datatables_query();

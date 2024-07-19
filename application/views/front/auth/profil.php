@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label>Alamat</label><br>
-                <?php echo $profil->address.', '.$profil->nama_kota.', '.$profil->nama_provinsi ?>
+                <?php echo $profil->address?>
             </div>
         </div>
     </div>

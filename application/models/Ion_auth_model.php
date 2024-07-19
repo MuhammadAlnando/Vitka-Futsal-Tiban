@@ -1062,7 +1062,7 @@ class Ion_auth_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 
-		$query = $this->db->select($this->identity_column . ', email, id, name, username, password, phone, address, provinsi, kota, usertype, active, last_login')
+		$query = $this->db->select($this->identity_column . ', email, id, name, username, password, phone, address, usertype, active, last_login')
 						  ->where($this->identity_column, $identity)
 							->where_in('usertype', array("3","4"))
 						  ->limit(1)
@@ -2069,9 +2069,7 @@ class Ion_auth_model extends CI_Model
 		    'email'           => $user->email,
 				'phone'           => $user->phone,
 				'address'        	=> $user->address,
-				'provinsi'        => $user->provinsi,
-				'kota'        		=> $user->kota,
-		    'usertype'        => $user->usertype,
+				'usertype'        => $user->usertype,
 		    'old_last_login'  => $user->last_login
 		);
 
@@ -2703,9 +2701,7 @@ class Ion_auth_model extends CI_Model
 	
 	public function profil()
 	{
-		$this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi');
-    $this->db->join('kota', 'kota.id_kota = users.kota');
-		$this->db->join('users_group', 'users.id = users_group.id_group', 'left');
+	$this->db->join('users_group', 'users.id = users_group.id_group', 'left');
 		$this->db->where('id', $this->session->userdata('user_id'));
     return $this->db->get('users')->row();
 	}

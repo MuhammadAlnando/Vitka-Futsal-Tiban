@@ -28,14 +28,7 @@
   						<div class="form-group"><label>Alamat</label>
   							<?php echo form_textarea($alamat);?>
   						</div>
-              <div class="form-row">
-                <div class="form-group col-md-6"><label>Provinsi</label>
-                  <?php echo form_dropdown('', $ambil_provinsi, '', $provinsi_id); ?>
-                </div>
-                <div class="form-group col-md-6"><label>Kabupaten/ Kota</label>
-                  <?php echo form_dropdown('', array(''=>'- Pilih Kota -'), '', $kota_id); ?>
-                </div>
-              </div>
+              
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-warning">Cancel</button>

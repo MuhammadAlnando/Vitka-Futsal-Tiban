@@ -20,7 +20,8 @@
                           
                             Harga (Buka - 17.00) : <strong style="color:red">Rp <?= $lapangan->harga ?></strong> / jam <br>
                             Harga (18.00 - 21.00): <strong style="color:red">Rp <?= $lapangan->harga_malam ?></strong> / jam
-                            <br>
+                            <br><br>
+                            <p><strong>Deskripsi:</strong> <br>Promo potongan harga <strong>50%</strong> khusus untuk jam ( Buka - 17.00 )</p>
                             <br>
                             <input type="date" id="tanggal_pilihan" class="form-control mb-2" style="width: 460px;" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
                             <br>
@@ -30,11 +31,46 @@
                             </div>
                             
                             <a href="<?= base_url('cart/buy/') . $lapangan->id_lapangan ?>" class="btn btn-primary" style="background-color: #223C95; border: none;">
-                                <i class="fa fa-shopping-cart"></i> Pesan Sekarang
+                                <i class="fa fa-futbol-o"></i> Sewa Lapangan
                             </a>
+                            <button type="button" class="btn btn-danger" style="border: none;" data-toggle="modal" data-target="#rulesModal">
+                                <i class="fa fa-exclamation-triangle"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="rulesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" style="text-align: center;" id="rulesModalLabel"><strong>ATURAN PENGGUNAAN LAPANGAN</strong></h5>
+            </div>
+            <div class="modal-body">
+                Harap pengguna Lapangan Vitka Futsal memperhatikan hal-hal sebagai berikut:
+                <ul>
+                    <li>Dilarang membuang sampah sembarangan.</li>
+                    <li>Dilarang merokok di dalam lapangan.</li>
+                    <li>Untuk pemain cadangan tidak diperkenankan berada di dalam lapangan.</li>
+                    <li>Yang diperbolehkan berada di dalam lapangan hanya pemain dan wasit.</li>
+                    <li>Tidak diperkenankan makan di dalam lapangan.</li>
+                    <li>Gunakan lapangan sesuai waktu dan segera tinggalkan lapangan setelah waktu habis.</li>
+                    <li>Harap menyimpan barang berharga di tempat yang aman, jika terjadi kehilangan di luar tanggung jawab pihak pengelola.</li>
+                    <li>Memakai pakaian dan sepatu yang olahraga yang sesuai.</li>
+                </ul>
+                Terima kasih atas kerja samanya, salam olahraga!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

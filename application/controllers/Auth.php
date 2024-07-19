@@ -59,8 +59,6 @@ class Auth extends CI_Controller {
 				'username'  	=> $this->input->post('username'),
 				'phone'      	=> $this->input->post('phone'),
 				'address'    	=> $this->input->post('alamat'),
-				'provinsi' 		=> $this->input->post('provinsi_id'),
-				'kota'   			=> $this->input->post('kota_id'),
 				'usertype'    => '3',
 			);
 
@@ -68,7 +66,7 @@ class Auth extends CI_Controller {
 			$this->ion_auth->register($identity, $password, $email, $additional_data);
 
 			// check to see if we are creating the user | redirect them back to the admin page
-			$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Registrasi Berhasil, silahkan login untuk mulai booking lapangan.</div>');
+			$this->session->set_flashdata('message', '<div class="alert" style="background-color: #EB7622; color: white;">Registrasi Berhasil, silahkan login untuk mulai Sewa lapangan.</div>');
 			redirect(base_url());
 		}
 			else
@@ -121,22 +119,9 @@ class Auth extends CI_Controller {
 					'rows'  => '2',
 					'value' => $this->form_validation->set_value('alamat'),
 				);
-				$this->data['provinsi_id'] = array(
-		      'name'        => 'provinsi_id',
-		      'id'          => 'provinsi_id',
-		      'class'       => 'form-control',
-		      'onChange'    => 'tampilKota()',
-		      'required'    => '',
-		    );
-		    $this->data['kota_id'] = array(
-		      'name'        => 'kota_id',
-		      'id'          => 'kota_id',
-		      'class'       => 'form-control',
-		      'required'    => '',
-		    );
+			
 
-				$this->data['ambil_provinsi'] = $this->Wilayah_model->get_provinsi();
-
+			
 				$this->load->view('front/auth/register', $this->data);
 			}
 	}
@@ -299,9 +284,7 @@ class Auth extends CI_Controller {
 					'email'     => strtolower($this->input->post('email')),
 					'address'  	=> $this->input->post('address'),
 					'phone'     => $this->input->post('phone'),
-					'provinsi'     => $this->input->post('provinsi_id'),
-					'kota'     => $this->input->post('kota_id'),
-				);
+					);
 
 				// jika password terisi
 				if ($this->input->post('password')){
@@ -388,25 +371,9 @@ class Auth extends CI_Controller {
 			'class'  => 'form-control',
 			'placeholder'  => 'diisi jika mengubah password'
 		);
-		$this->data['provinsi_id'] = array(
-			'name'        => 'provinsi_id',
-			'id'          => 'provinsi_id',
-			'class'       => 'form-control',
-			'onChange'    => 'tampilKota()',
-			'required'    => '',
-		);
-		$this->data['kota_id'] = array(
-			'name'        => 'kota_id',
-			'id'          => 'kota_id',
-			'class'       => 'form-control',
-			'required'    => '',
-		);
+		
 
-		$kota = $user->provinsi;
-
-		$this->data['ambil_provinsi'] = $this->Wilayah_model->get_provinsi();
-		$this->data['ambil_kota'] 		= $this->Wilayah_model->get_kota($kota);
-
+		
 		$this->_render_page('front/auth/edit_profil', $this->data);
 	}
 

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h2>DETAIL BOOKING</h2>
+            <h2>DETAIL PENYEWAAN</h2>
             <hr>
             <form action="<?php echo base_url('cart/checkout') ?>" method="post">
                 <div class="row">
@@ -104,7 +104,7 @@
                             
                             <a href="<?php echo base_url() ?>">
                                 <button name="hapus" type="button" class="btn btn-primary" style="background-color: #223C95; border: none;" aria-label="Left Align" title="Lanjut Belanja">
-                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Lanjut Belanja
+                                    <span  aria-hidden="true"></span> Kembali
                                 </button>
                             </a>
                             <?php if ($cek_keranjang != NULL) { ?>

@@ -35,14 +35,7 @@
 		    <div class="form-group"><label>Alamat</label>
 					<?php echo form_textarea($address);?>
 		    </div>
-				<div class="row">
-					<div class="col-sm-6"><label>Provinsi</label>
-						<?php echo form_dropdown('',$ambil_provinsi,$user->provinsi,$provinsi_id);?><br>
-					</div>
-					<div class="col-sm-6"><label>Kabupaten/ Kota</label>
-						<?php echo form_dropdown('',$ambil_kota,$user->kota,$kota_id);?><br>
-					</div>
-				</div>
+				
 				<?php echo form_hidden('id', $user->id);?>
 				<button type="submit" name="submit" class="btn btn-primary">Update</button>
 				<button type="reset" name="reset" class="btn btn-danger">Reset</button>
@@ -50,19 +43,5 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-function tampilKota()
-{
-	provinsi_id = document.getElementById("provinsi_id").value;
-	$.ajax({
-		url:"<?php echo base_url();?>auth/pilih_kota/"+provinsi_id+"",
-		success: function(response){
-			$("#kota_id").html(response);
-		},
-		dataType:"html"
-	});
-	return false;
-}
-</script>
 
 <?php $this->load->view('front/footer'); ?>

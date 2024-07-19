@@ -26,10 +26,7 @@
 												<th style="text-align: center">No.</th>
 												<th style="text-align: center">Nama Kontak</th>
 												<th style="text-align: center">No. HP</th>
-                        <th style="text-align: center">Uploader</th>
-                        <th style="text-align: center">Upload</th>
-                        <th style="text-align: center">Updater</th>
-                        <th style="text-align: center">Update</th>
+                       
 												<th style="text-align: center">Aksi</th>
 											</tr>
 										</thead>
@@ -39,10 +36,6 @@
                           <td style="text-align: center"><?php echo $no++ ?></td>
                           <td style="text-align: center"><?php echo $data->nama_kontak ?></td>
                           <td style="text-align: center"><?php echo $data->nohp ?></td>
-                          <td style="text-align: center"><?php echo $data->created_by ?></td>
-                          <td style="text-align: center"><?php echo $data->created_at ?></td>
-                          <td style="text-align: center"><?php echo $data->modified_by ?></td>
-                          <td style="text-align: center"><?php echo $data->modified_at ?></td>
                           <td style="text-align: center">
                             <?php
                             echo anchor(site_url('admin/kontak/update/'.$data->id_kontak),'<i class="fa fa-pencil"></i>','title="Edit", class="btn btn-sm btn-warning"'); echo ' ';

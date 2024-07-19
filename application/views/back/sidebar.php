@@ -23,11 +23,11 @@
             </li>
             <li class="treeview <?php if($this->uri->segment(2) == "event"){echo "active";} ?>">
                 <a href='#'>
-                    <span>&#x1F4F0;</span><span> Event </span><i class='fa fa-angle-left pull-right'></i>
+                    <span>&#x1F4F0;</span><span> Acara </span><i class='fa fa-angle-left pull-right'></i>
                 </a>
                 <ul class='treeview-menu'>
                     <li <?php if($this->uri->segment(2) == "event" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
-                        <a href='<?php echo base_url('admin/event') ?>'><span>&#x1F4C3;</span> Data Event </a>
+                        <a href='<?php echo base_url('admin/event') ?>'><span>&#x1F4C3;</span> Data Acara </a>
                     </li>
                     <li <?php if($this->uri->segment(2) == "kategori" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
                         <a href='<?php echo base_url('admin/kategori') ?>'><span>&#x1F4D6;</span> Data Kategori </a>
@@ -35,11 +35,11 @@
                 </ul>
             </li>
             <li <?php if($this->uri->segment(2) == "slider"){echo "class='active'";} ?>>
-                <a href='<?php echo base_url('admin/slider') ?>'><span>&#x1F4F1;</span> Slider </a>
+                <a href='<?php echo base_url('admin/slider') ?>'><span>&#x1F4F1;</span> Promosi </a>
             </li>
             <?php if ($this->ion_auth->is_superadmin()): ?>
             <li <?php if($this->uri->segment(2) == "bank" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
-                <a href='<?php echo base_url('admin/bank') ?>'><span>&#x1F4B3;</span> Bank </a>
+                <a href='<?php echo base_url('admin/bank') ?>'><span>&#x1F4B3;</span> Metode Pembayaran </a>
             </li>
             <?php endif ?>
             <?php if ($this->ion_auth->is_superadmin()): ?>
@@ -61,7 +61,7 @@
                     <a href='<?php echo base_url() ?>admin/auth/'><span>&#x1F464;</span> Data User</a>
                 </li>
             <?php endif ?>
-            <li> <a href='<?php echo base_url() ?>admin/auth/logout'> <span>&#x1F6AA;</span> <span>Logout</span> </a> </li>
+            <!-- <li> <a href='<?php echo base_url() ?>admin/auth/logout'> <span>&#x1F6AA;</span> <span>Keluar</span> </a> </li> -->
         </ul>
     </section>
 </aside>

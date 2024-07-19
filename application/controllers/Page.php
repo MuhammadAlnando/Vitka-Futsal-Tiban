@@ -28,6 +28,9 @@ class Page extends CI_Controller {
 
     /* melakukan pengecekan data, apabila ada maka akan ditampilkan */
   	$this->data['company']            = $this->Company_model->get_by_company();
+  // Fetch contact details based on the ID (assuming ID is 1)
+  $kontak_id = 1;
+        $data['kontak'] = $this->Kontak_model->get_kontak_by_id($kontak_id);
 
     /* memanggil view yang telah disiapkan dan passing data dari model ke view*/
 		$this->load->view('front/page/about', $this->data);

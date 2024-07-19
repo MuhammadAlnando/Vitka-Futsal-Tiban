@@ -6,7 +6,7 @@ class Company_model extends CI_Model
   public $id    = 'id_company';
   public $order = 'ASC';
 
-  var $column = array('id_company','company_name','company_desc','company_address','company_phone','company_phone2','company_fax','company_email','created','modified');
+  var $column = array('id_company','company_name','company_desc','company_address','company_fax','company_email','created','modified');
 
   function get_all()
   {

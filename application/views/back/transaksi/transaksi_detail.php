@@ -37,7 +37,7 @@
                         Kepada
                         <address>
                             <strong><?php echo $cart_finished_row->name ?></strong><br>
-                            <?php echo $cart_finished_row->address . ', ' . $cart_finished_row->nama_kota . ', ' . $cart_finished_row->nama_provinsi ?>
+                            <?php echo $cart_finished_row->address ?>
                         </address>
                     </div>
                     <div class="col-sm-4 invoice-col">

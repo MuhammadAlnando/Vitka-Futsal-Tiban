@@ -25,14 +25,7 @@
 									<div class="form-group"><label>Deskripsi</label>
 										<?php echo form_textarea($company_desc, $company->company_desc);?>
 									</div>
-									<div class="row">
-										<div class="col-xs-6"><label>No. HP</label>
-											<?php echo form_input($company_phone, $company->company_phone);?>
-										</div>
-										<div class="col-xs-6"><label>Telpon</label>
-											<?php echo form_input($company_phone2, $company->company_phone2);?>
-										</div>
-									</div><br>
+									
 									<div class="row">
 										<div class="col-xs-6"><label>Email</label>
 											<?php echo form_input($company_email, $company->company_email);?>

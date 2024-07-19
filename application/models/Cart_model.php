@@ -37,23 +37,18 @@ class Cart_model extends CI_Model
     lapangan.id_lapangan, lapangan.nama_lapangan,
     transaksi.id_trans, transaksi.id_invoice, transaksi.user_id, transaksi.subtotal, transaksi.diskon, transaksi.grand_total, transaksi.deadline, transaksi.status, transaksi.catatan, transaksi.created_date,
     transaksi_detail.trans_id, transaksi_detail.lapangan_id, transaksi_detail.tanggal, transaksi_detail.jam_mulai, transaksi_detail.durasi, transaksi_detail.jam_selesai, transaksi_detail.harga_jual, transaksi_detail.total,
-    provinsi.nama_provinsi,kota.nama_kota,
     users.id, users.name, users.address
     ');
     $this->db->join('lapangan', 'transaksi_detail.lapangan_id = lapangan.id_lapangan');
     $this->db->join('transaksi', 'transaksi_detail.trans_id = transaksi.id_trans');
     $this->db->join('users', 'transaksi.user_id = users.id');
-    $this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi');
-    $this->db->join('kota', 'kota.id_kota = users.kota');
     $this->db->where('transaksi.id_trans',$id);
     return $this->db->get($this->table2);
   }
 
   function get_data_customer_back($invoice)
   {
-    $this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi');
-    $this->db->join('kota', 'kota.id_kota = users.kota');
-    $this->db->join('transaksi', 'users.id = transaksi.user_id');
+  $this->db->join('transaksi', 'users.id = transaksi.user_id');
     $this->db->where('transaksi.id_trans', $invoice);
     return $this->db->get('users')->row();
   }
@@ -132,8 +127,6 @@ class Cart_model extends CI_Model
   // ambil data pribadi per customer login
   function get_data_customer()
   {
-    $this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi');
-    $this->db->join('kota', 'kota.id_kota = users.kota');
     $this->db->join('transaksi', 'users.id = transaksi.user_id');
     $this->db->order_by('transaksi.id_trans', 'DESC');
     $this->db->limit('1');

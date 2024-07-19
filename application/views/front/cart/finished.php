@@ -21,7 +21,6 @@
                 <tr>
 									<th style="text-align: center">No.</th>
                   <th style="text-align: center">Lapangan</th>
-									<th style="text-align: center">Harga Per Jam</th>
 									<th style="text-align: center">Tanggal</th>
                   <th style="text-align: center">Mulai</th>
 									<th style="text-align: center">Durasi</th>
@@ -34,7 +33,6 @@
                 <tr>
                   <td style="text-align:center"><?php echo $no++ ?></td>
                   <td style="text-align:left"><?php echo $cart->nama_lapangan ?></td>
-									<td style="text-align:center"><?php echo number_format($cart->harga_jual) ?></td>
 									<td style="text-align:center"><?php echo tgl_indo($cart->tanggal) ?></td>
                   <td style="text-align:center"><?php echo $cart->jam_mulai ?></td>
 									<td style="text-align:center"><?php echo $cart->durasi ?></td>

@@ -42,7 +42,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p><?php echo $captcha ?></p>
-                                            <p><a href="#" data-toggle="modal" data-target="#pswreset"><b>Lupa Password?</b></a></p>
+                                            <!-- <p><a href="#" data-toggle="modal" data-target="#pswreset"><b>Lupa Password?</b></a></p> -->
                                             <button type="submit" class="btn btn-primary btn-block btn-flat" style="background-color: #223C95;">Sign In</button>
                                         </div>
                                     </div>
