@@ -7,7 +7,7 @@
       <td align="center">
         <font style="font-size: 18px"><b><?php echo $company_data->company_name;?></b></font>
         <br><?php echo $company_data->company_address;?>
-        <br>No. HP: <?php echo $company_data->company_phone;?> | Telp: <?php echo $company_data->company_phone2;?> | Email: <?php echo $company_data->company_email;?>
+        <br>Email: <?php echo $company_data->company_email;?>
       </td>
     </tr>
   </table>
@@ -36,7 +36,7 @@
           <th style="text-align: center; background: #ddd; width: 80px">Mulai</th>
           <th style="text-align: center; background: #ddd; width: 50px">Durasi</th>
           <th style="text-align: center; background: #ddd; width: 80px">Selesai</th>
-          <th style="text-align: center; background: #ddd; width: 70px">Total</th>
+          <th style="text-align: center; background: #ddd; width: 170px">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -99,7 +99,7 @@
 	  <b>PERHATIAN</b><hr>
 		<ul>
      <li>Jumlah yang harus Anda bayarkan adalah sebesar: Rp <b><?php echo number_format($cart_finished_row->grand_total) ?></b></li>
-      <li>Silahkan melakukan konfirmasi pembayaran ke halaman berikut ini, <a href="<?php echo base_url('contact') ?>">klik disini</a> atau langsung menghubungi kami ke customer service yang telah disediakan dan melampirkan foto bukti bayarnya.</li>
+      <li>Silahkan melakukan konfirmasi pembayaran ke halaman berikut ini, <a href="<?php echo base_url('cart/history') ?>">klik disini</a> atau langsung menghubungi kami ke customer service yang telah disediakan dan melampirkan foto bukti bayarnya.</li>
       <li>Kami akan segera memproses pemesanan Anda setelah mendapatkan konfirmasi pembayaran segera mungkin.</li>
 		</ul>
 		<p align="center"><b>~ Terima Kasih ~</b></p>

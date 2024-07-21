@@ -7,7 +7,7 @@
             <div class="card">
                 <h2 class="card-header">REGISTER</h2>
                 <div class="card-body">
-                    <p class="card-text">Sudah punya akun? Silahkan <a href="<?php echo base_url('auth/login') ?>">Login disini</a></p>
+                    <p class="card-text">Sudah punya akun? Silahkan <a style="color: #EB7622;" href="<?php echo base_url('auth/login') ?>">Login disini</a></p>
                     <?php echo $message; ?>
                     <?php echo form_open("auth/register"); ?>
                         <div class="row">

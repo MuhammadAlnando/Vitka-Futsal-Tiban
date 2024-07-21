@@ -14,6 +14,13 @@ class Company_model extends CI_Model
     return $this->db->get($this->table)->result();
   }
 
+  public function get_company_details() {
+    $this->db->select('company_name, company_address, company_fax, company_email');
+    $this->db->from('company'); // Pastikan nama tabel sesuai dengan tabel di database
+    $query = $this->db->get();
+    return $query->row(); // Mengembalikan satu baris data
+}
+
   function get_all_company()
   {
     $this->db->order_by('company_name', 'ASC');

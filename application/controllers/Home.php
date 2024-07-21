@@ -12,12 +12,10 @@ class Home extends CI_Controller {
 		
 		$this->load->model('Kontak_model');
 		$this->load->model('Lapangan_model');
-		$this->load->model('Slider_model');
 
 		$this->data['company_data'] 	= $this->Company_model->get_by_company();
 		$this->data['event_new'] 			= $this->Event_model->get_all_new_home();
 		
-		$this->data['slider_data'] 		= $this->Slider_model->get_all_home();
 		$this->data['kontak'] 				= $this->Kontak_model->get_all();
 		$this->data['lapangan_new'] 	= $this->Lapangan_model->get_all_home();
 

@@ -642,14 +642,7 @@ public function update_user($id)
 		// Jika ada foto lama, maka hapus foto kemudian upload yang baru
 		if ($delete) {
 			// menyimpan lokasi gambar dalam variable
-			$dir = "assets/images/user/" . $delete->photo . $delete->photo_type;
-			$dir_thumb = "assets/images/user/" . $delete->photo . '_thumb' . $delete->photo_type;
-
-			if ($delete->photo == TRUE) {
-				// Hapus foto
-				unlink($dir);
-				unlink($dir_thumb);
-			}
+			
 
 			$this->Ion_auth_model->delete_user($id);
 			$this->session->set_flashdata('message', '

@@ -19,6 +19,35 @@ class Transaksi_detail_model extends CI_Model{
 		//
 		// return $query->result();
 	}
+    public function get_transactions_by_period($period) {
+        // Adjust the query based on the period
+        $this->db->select('*');
+        $this->db->from('transaksi'); // Use the correct table name
+        
+        $date = new DateTime();
+        
+        switch ($period) {
+            case 'today':
+                $this->db->where('DATE(created_date)', $date->format('Y-m-d'));
+                break;
+            case 'week':
+                $start = $date->modify('monday this week')->format('Y-m-d');
+                $end = $date->modify('sunday this week')->format('Y-m-d');
+                $this->db->where('DATE(created_date) >=', $start);
+                $this->db->where('DATE(created_date) <=', $end);
+                break;
+            case 'month':
+                $this->db->where('MONTH(created_date)', $date->format('m'));
+                $this->db->where('YEAR(created_date)', $date->format('Y'));
+                break;
+            case 'year':
+                $this->db->where('YEAR(created_date)', $date->format('Y'));
+                break;
+        }
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 
 	public function update_transaksi($id_trans, $data) {
         $this->db->where('id_trans', $id_trans);

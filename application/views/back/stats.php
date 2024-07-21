@@ -10,7 +10,7 @@
           </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-          <canvas id="canvas" width="100%" height="100%"></canvas>
+          <canvas id="canvas"></canvas>
           <?php foreach($stats_omset_tahunan as $laporan){
             $json_jual_tahunan[] = $laporan->nama_bulan;
             $json2_jual_tahunan[] = $laporan->subtotal;
@@ -60,7 +60,7 @@
           </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-          <canvas id="canvas_bulan" width="100%" height="100%"></canvas>
+          <canvas id="canvas_bulan"></canvas>
           <?php foreach($stats_omset_bulanan as $laporan_bulan){
             $json_jual_bulan[] = $laporan_bulan->created_date;
             $json2_jual_bulan[] = $laporan_bulan->subtotal;

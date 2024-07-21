@@ -13,7 +13,6 @@ class Dashboard extends CI_Controller {
 		$this->load->model('Kontak_model');
 		$this->load->model('Lapangan_model');
 
-		$this->load->model('Slider_model');
 
 		if(!$this->ion_auth->logged_in()){redirect('admin/auth/login', 'refresh');}
 		elseif(!$this->ion_auth->is_superadmin() && !$this->ion_auth->is_admin()){redirect(base_url());}
@@ -27,7 +26,6 @@ class Dashboard extends CI_Controller {
 				'total_kategori' 		=> $this->Kategori_model->total_rows(),
 				'total_kontak' 			=> $this->Kontak_model->total_rows(),
 				'total_lapangan'		=> $this->Lapangan_model->total_rows(),
-				'total_slider' 			=> $this->Slider_model->total_rows(),
 				'total_customer' 		=> $this->Ion_auth_model->total_rows_customer(),
 
 				'omset_harian' 				=> $this->Cart_model->get_omset_harian(),

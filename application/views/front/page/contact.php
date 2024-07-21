@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-md-8">
             <h2 class="mb-4">HUBUNGI KAMI</h2>
-            <hr>
+            <p>*Jika kamu memiliki pertanyaan, masukan atau pun keluhan. Silahkan isi form ini.</p>
+           <br>
             <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
             <?php if ($this->session->flashdata('message')) : ?>
                 <div class="alert alert-info alert-dismissible fade show" role="alert">

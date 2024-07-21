@@ -1,7 +1,7 @@
 <hr>
-<h3 align="center"><b>ACARA TERBARU</b></h3>
+<h3 align="center">Acara Terbaru</h3>
 <hr>
-
+<br>
 <div class="container">
   <div class="row">
     <?php foreach($event_new as $event): ?>

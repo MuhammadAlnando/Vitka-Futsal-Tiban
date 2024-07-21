@@ -16,9 +16,7 @@
           <div class="col-lg-12">
 						<div class="box box-primary">
               <div class="box-body">
-                <a href="<?php echo base_url('admin/auth/create_user') ?>">
-                  <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</button>
-                </a>
+              
                 <hr>
 								<?php echo $message;?>
                 <div class="table-responsive no-padding">

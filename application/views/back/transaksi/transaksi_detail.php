@@ -123,7 +123,7 @@
 
                 <div class="row no-print">
                     <div class="col-xs-12">
-                        <a href="javascript:window.print()" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                    <a href="javascript:void(0)" onclick="window.print()" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                     </div>
                 </div>
             </section>

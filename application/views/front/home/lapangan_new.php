@@ -1,28 +1,29 @@
 <!-- application/views/front/lapangan/lapangan_view.php -->
 <hr>
-<h3 align="center"><b>LAPANGAN KAMI</b></h3>
+<h3 style="text-align: center;">LAPANGAN</h3>
 <hr>
 <div class="row">
-  <?php foreach($lapangan_new as $lapangan){ ?>
-    <div class="col-lg-4">
-      <div class="thumbnail">
-        <?php
-        if(empty($lapangan->foto)) {
-          echo "<img class='card-img-top' src='".base_url()."assets/images/no_image_thumb.png'>";
-        } else {
-          echo "<img src='".base_url()."assets/images/lapangan/".$lapangan->foto."'>";
-        }
-        ?>
-        <div class="caption">
-          <p class="card-text"><b><?php echo $lapangan->nama_lapangan ?></b></p>
-          <hr>
-          <a href="<?php echo base_url('cart/buy/').$lapangan->id_lapangan ?>">
-            <button class="btn btn-sm btn-primary">
-              <i class="fa fa-shopping-cart"></i> <b>Rp <?php echo $lapangan->harga ?> /jam</b>
+  <?php
+  // Batasi hanya 3 lapangan
+  $limited_lapangan = array_slice($lapangan_new, 0, 3);
+
+  foreach($limited_lapangan as $lapangan): ?>
+    <div class="col-lg-4 mb-4"> <!-- Kolom untuk setiap lapangan -->
+      <h3 class="card-title"><b><?= $lapangan->nama_lapangan ?></b></h3>
+      <a href="<?= base_url('lapangan/detail/') . $lapangan->id_lapangan ?>" style="text-decoration: none;">
+        <div class="card shadow-sm" style="height: 100%;">
+          <?php if(empty($lapangan->foto)): ?>
+            <img class="card-img-top" src="<?= base_url('assets/images/no_image_thumb.png') ?>" style="height: 170px;">
+          <?php else: ?>
+            <img class="card-img-top" src="<?= base_url('assets/images/lapangan/' . $lapangan->foto) ?>" style="height: 170px;">
+          <?php endif; ?>
+          <div class="card-body text-right" style="margin: 10px 57px 0 0;">
+            <button class="btn btn-sm btn-primary" style="background-color: #223C95; border: none; width: 100%;">
+              <b>Detail Lapangan</b>
             </button>
-          </a>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
-  <?php } ?>
+  <?php endforeach; ?>
 </div>

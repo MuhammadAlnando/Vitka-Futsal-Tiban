@@ -78,6 +78,9 @@ $route['admin/pesan'] = 'admin/pesan/index';
 
 $route['admin/pesan/delete/(:num)'] = 'admin/pesan/delete/$1';
 
+$route['admin/transaksi/print'] = 'admin/transaksi/print';
+
+
 
 
 

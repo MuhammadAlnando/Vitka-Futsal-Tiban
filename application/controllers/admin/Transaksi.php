@@ -67,6 +67,42 @@ class Transaksi extends CI_Controller
     }
   }
 
+  public function print($period) {
+    $this->load->model('Company_model');
+    $this->load->model('Transaksi_detail_model');
+    
+    // Mendapatkan data transaksi berdasarkan periode
+    $data['transactions'] = $this->Transaksi_detail_model->get_transactions_by_period($period);
+    
+    // Mendapatkan detail perusahaan
+    $data['company'] = $this->Company_model->get_company_details();
+    
+    // Tentukan judul laporan berdasarkan periode
+    switch ($period) {
+        case 'today':
+            $data['report_title'] = 'Laporan Transaksi Harian';
+            break;
+        case 'week':
+            $data['report_title'] = 'Laporan Transaksi Mingguan';
+            break;
+        case 'month':
+            $data['report_title'] = 'Laporan Transaksi Bulanan';
+            break;
+        case 'year':
+            $data['report_title'] = 'Laporan Transaksi Tahunan';
+            break;
+        default:
+            $data['report_title'] = 'Transactions Report';
+            break;
+    }
+    
+    // Load the view from the correct path
+    $this->load->view('back/transaksi/print', $data);
+}
+
+
+
+
   public function create()
   {
     $this->load->model('Jam_model');

@@ -34,9 +34,7 @@
                     </li>
                 </ul>
             </li>
-            <li <?php if($this->uri->segment(2) == "slider"){echo "class='active'";} ?>>
-                <a href='<?php echo base_url('admin/slider') ?>'><span>&#x1F4F1;</span> Promosi </a>
-            </li>
+            
             <?php if ($this->ion_auth->is_superadmin()): ?>
             <li <?php if($this->uri->segment(2) == "bank" && $this->uri->segment(3) == ""){echo "class='active'";} ?>>
                 <a href='<?php echo base_url('admin/bank') ?>'><span>&#x1F4B3;</span> Metode Pembayaran </a>

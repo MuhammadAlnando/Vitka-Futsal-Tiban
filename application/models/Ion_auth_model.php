@@ -2707,8 +2707,7 @@ class Ion_auth_model extends CI_Model
 
 	function del_by_id($id)
   {
-    $this->db->select("photo, photo_type");
-    $this->db->where($this->id,$id);
+   $this->db->where($this->id,$id);
     return $this->db->get($this->table)->row();
   }
 }

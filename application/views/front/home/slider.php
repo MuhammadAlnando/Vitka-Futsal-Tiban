@@ -9,10 +9,12 @@
                     <img src="<?php echo base_url('assets/images/slider/') . $slider->foto . $slider->foto_type ?>">
                 </a>
             </li>
+
         <?php endforeach; ?>
+        <a href="<?php echo base_url('lapangan'); ?>" class="btn btn-primary slider-button">Sewa Sekarang</a>
+
     </ul>
-    <a href="<?php echo base_url('lapangan'); ?>" class="btn btn-primary slider-button">Sewa Sekarang</a>
-</div>
+    </div>
 
 
 <script type="text/javascript">
@@ -37,19 +39,5 @@
         });
     });
 </script>
-<style>
-    .slider-button {
-        position: absolute;
-        top: 150%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10; /* Pastikan z-index cukup tinggi agar tombol tampil di atas slider */
-        background-color: #EB7622;
-        border: none;
-        padding: 10px 20px;
-        color: white;
-        text-decoration: none; /* Hapus dekorasi tautan */
-    }
-</style>
 
 

@@ -1,59 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title><?php echo $title ?></title>
     <meta charset="UTF-8">
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $title; ?></title>
+
     <!-- Bootstrap CSS -->
     <link href="<?php echo base_url('assets/template/backend/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />
     <!-- AdminLTE CSS -->
     <link href="<?php echo base_url('assets/template/backend/dist/css/AdminLTE.min.css'); ?>" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?php echo base_url('assets/images/fav.png'); ?>" />
+    <style>
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            width: 360px;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .login-logo {
+            margin-bottom: 20px;
+        }
+        .login-logo b {
+            font-size: 24px;
+        }
+        .btn-primary {
+            background-color: #223C95;
+            border-color: #223C95;
+        }
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #1a2a6b;
+            border-color: #1a2a6b;
+        }
+        .modal-header .close {
+            color: #000;
+        }
+    </style>
     <!-- jQuery -->
     <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.3.1.js'); ?>"></script>
     <!-- Bootstrap JS -->
     <script src="<?php echo base_url('assets/template/backend/bootstrap/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="<?php echo base_url('assets/images/fav.png'); ?>" />
-    <?php echo $script_captcha; // javascript recaptcha ?>
+    <?php echo $script_captcha; // JavaScript reCAPTCHA ?>
 </head>
 <body class="login-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="login-box" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); border-radius: 10px;">
-                    <div class="login-box-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- Form Login -->
-                                <div class="login-logo" style="text-align: center;">
-                                    <b>Admin</b> Login
-                                    <hr>
-                                </div>
-                                <?php echo $message; ?>
-                                <?php echo form_open("admin/auth/login"); ?>
-                                    <div class="form-group has-feedback">
-                                        <?php echo form_input($identity); ?>
-                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                    </div>
-                                    <div class="form-group has-feedback">
-                                        <?php echo form_password($password); ?>
-                                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p><?php echo $captcha ?></p>
-                                            <!-- <p><a href="#" data-toggle="modal" data-target="#pswreset"><b>Lupa Password?</b></a></p> -->
-                                            <button type="submit" class="btn btn-primary btn-block btn-flat" style="background-color: #223C95;">Sign In</button>
-                                        </div>
-                                    </div>
-                                <?php echo form_close(); ?>
-                            </div>
-                        </div>
-                    </div><!-- /.login-box-body -->
-                </div><!-- /.login-box -->
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
+
+    <div class="login-box">
+        <div class="login-logo text-center">
+            <p class="text-center">Admin Login</p>
+            <hr>
+        </div>
+        <?php echo $message; ?>
+        <?php echo form_open("admin/auth/login"); ?>
+            <div class="form-group has-feedback">
+                <?php echo form_input($identity, '', ['class' => 'form-control', 'placeholder' => 'Username']); ?>
+                <span class="fas fa-user form-control-feedback" style="margin-top: 10px;"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <?php echo form_password($password, '', ['class' => 'form-control', 'placeholder' => 'Password']); ?>
+                <span class="fas fa-lock form-control-feedback" style="margin-top: 10px;"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p><?php echo $captcha; ?></p>
+                    <!-- <p><a href="#" data-toggle="modal" data-target="#pswreset"><b>Lupa Password?</b></a></p> -->
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+            </div>
+        <?php echo form_close(); ?>
+    </div><!-- /.login-box -->
 
     <!-- Modal Reset Password -->
     <div id="pswreset" class="modal fade" role="dialog">
@@ -67,7 +92,7 @@
                 <div class="modal-body">
                     <?php echo form_open("admin/auth/forgot_password"); ?>
                         <div class="form-group">
-                            <label>Silahkan masukkan Email Anda</label>
+                            <label for="identity">Silahkan masukkan Email Anda</label>
                             <input class="form-control" name="identity" type="text" id="identity" />
                         </div>
                         <button type="submit" name="submit" class="btn btn-success">Submit</button>

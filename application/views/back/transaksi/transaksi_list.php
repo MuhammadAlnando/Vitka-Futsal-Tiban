@@ -12,6 +12,12 @@
                     <div class="box box-primary">
                         <div class="box-body">
                             <?php echo $this->session->flashdata('message') ? $this->session->flashdata('message') : ''; ?>
+                            <div class="mb-3" style="margin-bottom: 15px;">
+                                <button id="printToday" class="btn btn-info">Print Hari Ini</button>
+                                <button id="printWeek" class="btn btn-info">Print Minggu Ini</button>
+                                <button id="printMonth" class="btn btn-info">Print Bulan Ini</button>
+                                <button id="printYear" class="btn btn-info">Print Tahun Ini</button>
+                            </div>
                             <div class="table-responsive no-padding">
                                 <table id="datatable" class="table table-striped">
                                     <thead>
@@ -93,7 +99,7 @@
 <script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js') ?>" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#datatable').DataTable({
+    var table = $('#datatable').DataTable({
         "bPaginate": true,
         "bLengthChange": true,
         "bFilter": true,
@@ -103,6 +109,27 @@ $(document).ready(function() {
         "aaSorting": [[0,'desc']],
         "lengthMenu": [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "Semua"]]
     });
+
+    $('#printToday').on('click', function() {
+        printFilteredData('today');
+    });
+
+    $('#printWeek').on('click', function() {
+        printFilteredData('week');
+    });
+
+    $('#printMonth').on('click', function() {
+        printFilteredData('month');
+    });
+
+    $('#printYear').on('click', function() {
+        printFilteredData('year');
+    });
+
+    function printFilteredData(period) {
+        var url = '<?php echo base_url('admin/transaksi/print/') ?>' + period;
+        window.open(url, '_blank');
+    }
 });
 </script>
 </body>
