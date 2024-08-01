@@ -1,12 +1,9 @@
-<?php $this->load->view('front/header'); ?>
-<?php $this->load->view('front/navbar'); ?>
-
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <h2 class="mb-4">HUBUNGI KAMI</h2>
-            <p>*Jika kamu memiliki pertanyaan, masukan atau pun keluhan. Silahkan isi form ini.</p>
-           <br>
+        <div class="col-md-12 offset-md-2">
+            <h2 class="mb-4 text-center">HUBUNGI KAMI</h2>
+            <p style="text-align: center;">*Jika kamu memiliki pertanyaan, masukan atau pun keluhan, silahkan isi form ini.</p>
+            <br>
             <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
             <?php if ($this->session->flashdata('message')) : ?>
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -17,33 +14,36 @@
                 </div>
             <?php endif; ?>
             <form id="contactForm" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="nama_pengirim" name="nama_pengirim" placeholder="Nama Pengirim" readonly value="<?php echo $this->session->userdata('name'); ?>">
-                </div>
-                <div class="form-group">
-                    <select class="form-control" id="subjek" name="subjek">
-                        <option value="" disabled selected>Pilih Subjek</option>
-                        <option value="Konfirmasi Pemesanan">Acara/Event</option>
-                        <option value="Masukan">Masukan</option>
-                        <option value="Pengaduan">Pengaduan</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="nama_pengirim" name="nama_pengirim" placeholder="Nama Pengirim" readonly value="<?php echo $this->session->userdata('name'); ?>">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="form-control" id="subjek" name="subjek">
+                            <option value="" disabled selected>Pilih Subjek</option>
+                            <option value="Masukan">Masukan</option>
+                            <option value="Pengaduan">Pengaduan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" id="pesan" name="pesan" rows="5" placeholder="Isi Pesan"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="userfile">Lampiran</label>
-                    <input type="file" name="userfile" class="form-control-file" id="userfile">
-                    <small class="form-text text-danger"><?= form_error('userfile'); ?></small>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="userfile">Lampiran</label>
+                        <input type="file" name="userfile" class="form-control-file" id="userfile">
+                        <small class="form-text text-danger"><?= form_error('userfile'); ?></small>
+                    </div>
+                    <div class="form-group col-md-4 d-flex align-items-end">
+                        <button type="button" id="submit" class="btn btn-primary" style="background-color: #223C95; border: none;">Kirim Pesan</button>
+                    </div>
                 </div>
-                <button type="button" id="submit" class="btn btn-primary">Kirim Pesan</button>
             </form>
         </div>
     </div>
 </div>
-
-<?php $this->load->view('front/footer'); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

@@ -21,6 +21,8 @@ class Cart extends CI_Controller
 		$this->load->model('Lapangan_model');
 
 		$this->data['company_data'] 			= $this->Company_model->get_by_company();
+		
+		$this->data['company']    = $this->Company_model->get_by_company();
 		$this->data['kontak'] 						= $this->Kontak_model->get_all();
 		$this->data['total_cart_navbar'] 	= $this->Cart_model->total_cart_navbar();
 
@@ -57,6 +59,7 @@ class Cart extends CI_Controller
 		$this->data['cek_keranjang'] 		= $this->Cart_model->get_cart_per_customer()->row();
 		// ambil data customer
 		$this->data['customer_data'] 		= $this->Cart_model->get_data_customer();
+		
 
 		$this->load->view('front/cart/body', $this->data);
 	}

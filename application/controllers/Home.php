@@ -15,6 +15,7 @@ class Home extends CI_Controller {
 
 		$this->data['company_data'] 	= $this->Company_model->get_by_company();
 		$this->data['event_new'] 			= $this->Event_model->get_all_new_home();
+		$this->data['company']    = $this->Company_model->get_by_company();
 		
 		$this->data['kontak'] 				= $this->Kontak_model->get_all();
 		$this->data['lapangan_new'] 	= $this->Lapangan_model->get_all_home();

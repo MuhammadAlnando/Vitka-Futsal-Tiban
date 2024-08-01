@@ -35,6 +35,8 @@ class Lapangan extends CI_Controller {
     public function detail($id_lapangan) {
         $this->load->model('Lapangan_model');
         $this->data['title'] = "Lapangan Detail";
+        
+		$this->data['company']    = $this->Company_model->get_by_company();
         $data['lapangan'] = $this->Lapangan_model->get_lapangan_by_id($id_lapangan);
         $data = array_merge($data, $this->data); // Gabungkan data
 

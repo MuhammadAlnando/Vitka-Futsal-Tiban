@@ -145,4 +145,10 @@ class Company_model extends CI_Model
     return $this->db->get($this->table)->num_rows();
   }
 
+  public function get_company_info() {
+    // Example query; adjust as needed
+    $query = $this->db->get('company');
+    return $query->row();
+}
+
 }

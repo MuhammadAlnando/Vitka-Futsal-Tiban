@@ -89,8 +89,8 @@
                                                     <button name="update" class="btn btn-warning"><i class="glyphicon glyphicon-zoom-in"></i> Detail</button>
                                                 </a>
                                                 <!-- Tombol Cancel -->
-                                                <?php if($history->status != '2' && $history->status != '3'): ?>
-                                                    <a href="<?php echo base_url('cart/cancel/') . $history->id_trans ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin membatalkan transaksi ini?');"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
+                                                <?php if($history->status != '2' && $history->status != '3' && $history->status != '5'): ?>
+                                                    <a href="<?php echo base_url('cart/cancel/') . $history->id_trans ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin membatalkan transaksi ini?');"><i class="glyphicon glyphicon-remove"></i> Batal</a>
                                                 <?php endif; ?>
                                             </td>
                                         </tr>

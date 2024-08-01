@@ -18,6 +18,8 @@ class Page extends CI_Controller {
 		$this->data['kategori_sidebar'] 	= $this->Kategori_model->get_all();
 		$this->data['kontak_sidebar'] 		= $this->Kontak_model->get_all();
 		$this->data['kontak'] 				= $this->Kontak_model->get_all();
+		
+		$this->data['company']    = $this->Company_model->get_by_company();
   }
 
   

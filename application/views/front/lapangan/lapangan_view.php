@@ -21,6 +21,7 @@
                   <button class="btn btn-sm btn-primary" style="background-color: #223C95; border: none; width: 100%;">
                     <b>Detail Lapangan</b>
                   </button>
+                  
                 </div>
               </div>
             </a>

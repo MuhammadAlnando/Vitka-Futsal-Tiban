@@ -93,6 +93,7 @@
         <div class="right">
             <p>Fax: <?php echo $company->company_fax; ?></p>
             <p>Email: <?php echo $company->company_email; ?></p>
+            <p>Tanggal Print: <?php echo date('d-m-Y'); ?></p> <!-- Add current date here -->
         </div>
     </div>
     <button class="print-button" onclick="printPage()" aria-label="Print Report">Print</button>
@@ -107,9 +108,14 @@
             </tr>
         </thead>
         <tbody>
-            <?php $no = 1; $total_grand_total = 0; ?>
+            <?php 
+            $no = 1; 
+            $total_grand_total = 0; 
+            $has_transactions = false;
+            ?>
             <?php foreach ($transactions as $transaction) { ?>
                 <?php if ($transaction->status == '2') { ?>
+                <?php $has_transactions = true; ?>
                 <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $transaction->id_invoice ?></td>
@@ -133,12 +139,19 @@
                 </tr>
                 <?php } ?>
             <?php } ?>
+            <?php if (!$has_transactions) { ?>
+                <tr>
+                    <td colspan="5" style="text-align: center;">Tidak ada transaksi yang ditemukan.</td>
+                </tr>
+            <?php } ?>
         </tbody>
         <tfoot>
+            <?php if ($has_transactions) { ?>
             <tr class="total-row">
                 <td colspan="4" style="text-align: right;">Total</td>
                 <td><?php echo number_format($total_grand_total) ?></td>
             </tr>
+            <?php } ?>
         </tfoot>
     </table>
     </div>

@@ -71,14 +71,15 @@
                                                 <?php } ?>
                                             </td>
                                             <td style="text-align:center">
-                                                <?php if($data->status != '2'){ ?>
-                                                    <a href="<?php echo base_url('admin/transaksi/set_lunas/'.$data->id_trans) ?>" class="btn btn-success"><i class="fa fa-check"></i>Lunas</a>
-                                                <?php } ?>
-                                                <?php if($data->status != '3' && $data->status != '2'){ ?>
-                                                    <a href="<?php echo base_url('admin/transaksi/set_tolak/'.$data->id_trans) ?>" class="btn btn-danger"><i class="fa fa-times"></i>Tolak</a>
-                                                <?php } ?>
-                                                <a href="<?php echo base_url('admin/transaksi/detail/'.$data->id_trans) ?>" class="btn btn-primary"><i class="fa fa-search-plus"></i></a>
-                                            </td>
+    <?php if($data->status != '2' && $data->status != '3' && $data->status != '0'){ ?>
+        <a href="<?php echo base_url('admin/transaksi/set_lunas/'.$data->id_trans) ?>" class="btn btn-success"><i class="fa fa-check"></i>Lunas</a>
+    <?php } ?>
+    <?php if($data->status != '3' && $data->status != '2'){ ?>
+        <a href="<?php echo base_url('admin/transaksi/set_tolak/'.$data->id_trans) ?>" class="btn btn-danger"><i class="fa fa-times"></i>Tolak</a>
+    <?php } ?>
+    <a href="<?php echo base_url('admin/transaksi/detail/'.$data->id_trans) ?>" class="btn btn-primary"><i class="fa fa-search-plus"></i></a>
+</td>
+
                                         </tr>
                                         <?php } ?>
                                     </tbody>

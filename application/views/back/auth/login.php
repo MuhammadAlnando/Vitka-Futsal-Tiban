@@ -54,7 +54,6 @@
     <?php echo $script_captcha; // JavaScript reCAPTCHA ?>
 </head>
 <body class="login-page">
-
     <div class="login-box">
         <div class="login-logo text-center">
             <p class="text-center">Admin Login</p>
@@ -79,7 +78,6 @@
             </div>
         <?php echo form_close(); ?>
     </div><!-- /.login-box -->
-
     <!-- Modal Reset Password -->
     <div id="pswreset" class="modal fade" role="dialog">
         <div class="modal-dialog">

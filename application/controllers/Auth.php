@@ -15,6 +15,8 @@ class Auth extends CI_Controller {
 
 		$this->data['module'] = 'Customer';
 		$this->data['company_data'] 			= $this->Company_model->get_by_company();
+		
+		$this->data['company']    = $this->Company_model->get_by_company();
 		$this->data['kontak'] 						= $this->Kontak_model->get_all();
 	}
 
