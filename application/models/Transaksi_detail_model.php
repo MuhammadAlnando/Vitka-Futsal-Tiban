@@ -131,11 +131,5 @@ class Transaksi_detail_model extends CI_Model{
         return $this->db->count_all_results();
     }
 
-    public function update_expired_transactions() {
-        // Set status menjadi 3 (Ditolak/Expired) untuk transaksi dengan status 1 yang sudah lebih dari 1 jam
-        $this->db->set('status', '3'); 
-        $this->db->where('status', '1'); 
-        $this->db->where('TIMESTAMPDIFF(HOUR, CONCAT(created_date, " ", created_time), NOW()) > 1'); // Memeriksa jika sudah lebih dari 1 jam
-        $this->db->update('transaksi');
-    }
+
 }

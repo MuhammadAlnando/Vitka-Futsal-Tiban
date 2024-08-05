@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body table-responsive padding">
                         <?php if(empty($cek_cart_history->id_trans)): ?>
-                            Anda belum ada transaksi
+                            Anda belum ada transaksi <br><br><br><br><br><br><br>
                         <?php else: ?>
                             <table id="datatable" class="table table-striped table-bordered">
                                 <thead>
@@ -42,7 +42,7 @@
                                                 <?php if($history->status == '1'): ?>
                                                     <button type="button" name="status" class="btn btn-danger">BELUM LUNAS</button>
                                                 <?php elseif($history->status == '2'): ?>
-                                                    <button type="button" name="status" class="btn btn-success">LUNAS</button>
+                                                    <button type="button" name="status" class="btn btn-primary" style="background-color:forestgreen; border: none;">LUNAS</button>
                                                     <?php elseif($history->status == '3'): ?>
                                                         <button type="button" name="status" class="btn btn-danger">DITOLAK/EXPIRED</button>
                                                 <?php elseif($history->status == '5'): ?>

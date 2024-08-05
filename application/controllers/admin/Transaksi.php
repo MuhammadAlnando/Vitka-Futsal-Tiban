@@ -528,9 +528,4 @@ class Transaksi extends CI_Controller
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger alert">', '</div>');
   }
 
-  public function check_expired_transactions() {
-    $this->load->model('Transaksi_detail_model');
-    $this->Transaksi_detail_model->update_expired_transactions();
-}
-
 }

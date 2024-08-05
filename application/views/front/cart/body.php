@@ -108,7 +108,7 @@
                                 </button>
                             </a>
                             <?php if ($cek_keranjang != NULL) { ?>
-                                <button name="checkout" type="submit" class="btn btn-success" style="border: none;" aria-label="Left Align" title="Checkout">
+                                <button name="checkout" type="submit" class="btn btn-primary" style="border: none;" aria-label="Left Align" title="Checkout">
                                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Checkout
                                 </button>
                             <?php } ?>
