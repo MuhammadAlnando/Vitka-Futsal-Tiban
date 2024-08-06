@@ -100,8 +100,8 @@ class Page extends CI_Controller {
 				// setingan default tanpa smtp
 				$this->load->library('email');
 
-				$this->email->from('mail@azmicolejr.com', 'Pesan Baru dari Website');
-				$this->email->to('azmi2793@gmail.com');
+				$this->email->from('casanovaallabella@gmail.com', 'Pesan Baru dari Website');
+				$this->email->to('muhammadalnando40@gmail.com');
 				$this->email->subject($subject);
 				$this->email->message($message);
 
@@ -122,8 +122,8 @@ class Page extends CI_Controller {
 		// setingan default tanpa smtp
 		$this->load->library('email');
 
-		$this->email->from('mail@azmicolejr.com', 'fungsimail');
-		$this->email->to('azmi2793@gmail.com');
+		$this->email->from('casanovaallabella@gmail.com', 'fungsimail');
+		$this->email->to('muhammadalnando40@gmail.com');
 		$this->email->subject('kirimemailpakemail');
 		$this->email->message('asdsadasd');
 
@@ -133,14 +133,14 @@ class Page extends CI_Controller {
 		}
 		else
 		{
-			echo "gasgal";
+			echo "gagal";
 		}
 
 		// Konfigurasi email dengan smtp
     // $config = [
     //    'smtp_host' => 'ssl://smtp.gmail.com',
-    //    'smtp_user' => 'azmicolejr@gmail.com',   // Ganti dengan email gmail Anda.
-    //    'smtp_pass' => 'Revoiu2550',             // Password gmail Anda.
+    //    'smtp_user' => 'muhammadalnando40@gmail.com',   // Ganti dengan email gmail Anda.
+    //    'smtp_pass' => 'batam2023',             // Password gmail Anda.
     //    'smtp_port' => 465,
    	// ];
 		//
@@ -148,8 +148,8 @@ class Page extends CI_Controller {
     // $this->load->library('email', $config);
 		//
     // // Pengirim dan penerima email.
-    // $this->email->from('mail@azmicolejr.com', 'kirimpakesmtp');    // Email dan nama pegirim.
-    // $this->email->to('azmi2793@gmail.com');                       // Penerima email.
+    // $this->email->from('casanovaallabella@gmail.com', 'kirimpakesmtp');    // Email dan nama pegirim.
+    // $this->email->to('muhammadalnando40@gmail.com');                       // Penerima email.
 		//
     // // Subject email.
     // $this->email->subject('Kirim Email pada CodeIgniter');

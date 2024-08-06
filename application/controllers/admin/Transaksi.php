@@ -402,8 +402,8 @@ class Transaksi extends CI_Controller
   //     // $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
   //
   //     // set document information
-  //     $pdf->SetCreator('AzmiColeJr');
-  //     $pdf->SetAuthor('AzmiColeJr');
+  //     $pdf->SetCreator('MuhammadAlnando');
+  //     $pdf->SetAuthor('MuhammadAlnando');
   //     $pdf->SetTitle('Print '.$row->id_invoice);
   //
   //     // Set font
