@@ -222,14 +222,11 @@ $(document).ready(function() {
 .discount-badge {
     position: absolute;
     top: 10px;
-    left: 0px;
-    background-color: #FF0000; /* Red background for the badge */
-    color: #FFFFFF; /* White text */
-    padding: 5px 10px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 1.2em;
-    transform: rotate(-30deg); /* Rotate the badge for a dynamic effect */
-    z-index: 10; /* Ensure the badge appears above other content */
+    right: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.9em;
 }
 </style>

@@ -28,10 +28,7 @@ class Cart extends CI_Controller
 
 		$this->load->helper('tgl_indo');
 
-		if (!$this->ion_auth->logged_in()) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert">Silahkan login dulu</div>');
-			redirect(base_url('auth/login'));
-		}
+		
 	}
 
 	public function index()
@@ -66,6 +63,11 @@ class Cart extends CI_Controller
 
 	public function buy($id)
 	{
+
+		if (!$this->ion_auth->logged_in()) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert">Silahkan login dulu</div>');
+			redirect(base_url('auth/login'));
+		}
 		// ambil data produk
 		$row = $this->Lapangan_model->get_by_id($id);
 
