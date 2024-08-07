@@ -33,12 +33,12 @@
         <span>Jadwal Tersedia:</span>
     </div>
     <div style="display: flex; align-items: center; margin-right: 20px;">
-        <span style="display: inline-block; width: 10px; height: 10px; background-color: blue; border-radius: 50%; margin-right: 5px;"></span>
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: #223C95; border-radius: 50%; margin-right: 5px;"></span>
         <span>Tersedia</span>
     </div>
     <div style="display: flex; align-items: center;">
-        <span style="display: inline-block; width: 10px; height: 10px; background-color: red; border-radius: 50%; margin-right: 5px;"></span>
-        <span>Tidak Tersedia</span>
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: #B22222; border-radius: 50%; margin-right: 5px;"></span>
+        <span>Telah Dipesan</span>
     </div>
     
 </div>
