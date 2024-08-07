@@ -32,13 +32,13 @@
                 <div class="jam-mulai" id="jam_mulai_<?= $lapangan->id_lapangan ?>">
                   <!-- Tempat untuk menampilkan jadwal mulai -->
                 </div>
-                <div class="mt-3" style="margin-top: 10px;">
-                  <a href="<?= base_url('cart/buy/') . $lapangan->id_lapangan ?>" class="btn btn-primary" style="background-color: #223C95; border:none;">
+                <div class="mt-3" style="margin-top: 10px; text-align:right;">
+                  <a href="<?= base_url('cart/buy/') . $lapangan->id_lapangan ?>" class="btn btn-primary" style="background-color: #223C95; border:none; width:91%;">
                     <b>Sewa</b>
-                  </a>
-                  <a href="<?= base_url('lapangan/detail/' . $lapangan->id_lapangan) ?>" class="btn btn-primary" style="background-color:#EB7622; border:none;">
-                    <b>Detail</b>
-                  </a>
+                  </a>        
+                  <button type="button" class="btn btn-danger" style="border: none;" data-toggle="modal" data-target="#rulesModal">
+                                <i class="fa fa-exclamation-triangle"></i>
+                            </button>         
                 </div>
               </div>
             </div>
@@ -48,6 +48,38 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="rulesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" style="text-align: center;" id="rulesModalLabel"><strong>ATURAN PENGGUNAAN LAPANGAN</strong></h5>
+            </div>
+            <div class="modal-body">
+                Harap pengguna Lapangan Vitka Futsal memperhatikan hal-hal sebagai berikut:
+                <ul>
+                    <li>Dilarang membuang sampah sembarangan.</li>
+                    <li>Dilarang merokok di dalam lapangan.</li>
+                    <li>Untuk pemain cadangan tidak diperkenankan berada di dalam lapangan.</li>
+                    <li>Yang diperbolehkan berada di dalam lapangan hanya pemain dan wasit.</li>
+                    <li>Tidak diperkenankan makan di dalam lapangan.</li>
+                    <li>Gunakan lapangan sesuai waktu dan segera tinggalkan lapangan setelah waktu habis.</li>
+                    <li>Harap menyimpan barang berharga di tempat yang aman, jika terjadi kehilangan di luar tanggung jawab pihak pengelola.</li>
+                    <li>Memakai pakaian dan sepatu yang olahraga yang sesuai.</li>
+                </ul>
+                Terima kasih atas kerja samanya, salam olahraga!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Include Bootstrap JS for carousel functionality -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
