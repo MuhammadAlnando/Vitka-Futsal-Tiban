@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 offset-md-2">
-            <h2 class="mb-4 text-center">HUBUNGI KAMI</h2>
-            <p style="text-align: center;">*Jika kamu memiliki pertanyaan, masukan atau pun keluhan, silahkan isi form ini.</p>
+            <h2 class="mb-4 text-center" style="font-family: 'Arial', sans-serif;">HUBUNGI KAMI</h2>
+            <p style="text-align: center; font-family: 'Arial', sans-serif;">*Jika kamu memiliki pertanyaan, masukan atau pun keluhan, silahkan isi form ini.</p>
             <br>
             <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
             <?php if ($this->session->flashdata('message')) : ?>

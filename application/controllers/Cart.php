@@ -408,6 +408,101 @@ redirect(site_url('cart'));
     echo json_encode($result);
 }
 
+public function getJamTersedia()
+{
+    $tanggal = $this->input->post('tanggal');
+    $lapangan_id = $this->input->post('lapangan_id');
+
+    if ($tanggal === FALSE || $lapangan_id === FALSE) {
+        echo json_encode(array());
+        die();
+    }
+
+    // Get the current time and date
+    $current_date = new DateTime();
+    $current_time_str = $current_date->format('H:i:s');
+
+    // Check if the selected date is today
+    $is_today = ($tanggal === $current_date->format('Y-m-d'));
+
+    $list_jam_mulai_terpakai = $this->Transaksi_detail_model->get_jam_mulai_terpakai($tanggal, $lapangan_id);
+
+    $list_jam_mulai_terpakai_arr = array();
+    foreach ($list_jam_mulai_terpakai as $a_jam) {
+        if (intval($a_jam->durasi) > 1) {
+            $list_jam_range = $this->Jam_model->get_jam_range($a_jam->jam_mulai, $a_jam->jam_selesai);
+            foreach ($list_jam_range as $a_jam_from_range) {
+                if (!in_array($a_jam_from_range->jam, $list_jam_mulai_terpakai_arr)) {
+                    array_push($list_jam_mulai_terpakai_arr, $a_jam_from_range->jam);
+                }
+            }
+        } else {
+            if (!in_array($a_jam->jam_mulai, $list_jam_mulai_terpakai_arr)) {
+                array_push($list_jam_mulai_terpakai_arr, $a_jam->jam_mulai);
+            }
+        }
+    }
+
+    $list_jam = $this->Jam_model->get();
+
+    $list_jam_arr = array();
+    foreach ($list_jam as $a_jam) {
+        if ($is_today) {
+            if ($a_jam->jam > $current_time_str) {
+                array_push($list_jam_arr, $a_jam->jam);
+            }
+        } else {
+            array_push($list_jam_arr, $a_jam->jam);
+        }
+    }
+
+    $result = array();
+
+    foreach ($list_jam_arr as $a_jam) {
+        if (!in_array($a_jam, $list_jam_mulai_terpakai_arr)) {
+            $a_jam_row = new stdClass();
+            $a_jam_row->durasi = '1';
+            $a_jam_row->jam_mulai = $a_jam;
+
+            array_push($result, $a_jam_row);
+        }
+    }
+
+    echo json_encode($result);
+}
+
+public function getJamTerpakai()
+{
+    $tanggal = $this->input->post('tanggal');
+    $lapangan_id = $this->input->post('lapangan_id');
+
+    if ($tanggal === FALSE || $lapangan_id === FALSE) {
+        echo json_encode(array());
+        die();
+    }
+
+    $list_jam_mulai_terpakai = $this->Transaksi_detail_model->get_jam_mulai_terpakai($tanggal, $lapangan_id);
+
+    $list_jam_terpakai_arr = array();
+    foreach ($list_jam_mulai_terpakai as $a_jam) {
+        if (intval($a_jam->durasi) > 1) {
+            $list_jam_range = $this->Jam_model->get_jam_range($a_jam->jam_mulai, $a_jam->jam_selesai);
+            foreach ($list_jam_range as $a_jam_from_range) {
+                if (!in_array($a_jam_from_range->jam, $list_jam_terpakai_arr)) {
+                    array_push($list_jam_terpakai_arr, $a_jam_from_range->jam);
+                }
+            }
+        } else {
+            if (!in_array($a_jam->jam_mulai, $list_jam_terpakai_arr)) {
+                array_push($list_jam_terpakai_arr, $a_jam->jam_mulai);
+            }
+        }
+    }
+
+    echo json_encode($list_jam_terpakai_arr);
+}
+
+
 
 	public function upload_bukti($id_trans) {
         // Konfigurasi upload file

@@ -1,10 +1,10 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="text-center">JADWAL LAPANGAN</h2>
+      <h2 class="text-center" style="font-family: 'Arial', sans-serif;">JADWAL LAPANGAN</h2>
       <hr>
       <div class="form-group">
-        <label for="tanggal_pilihan">Pilih Tanggal:</label>
+        <label for="tanggal_pilihan" style="font-family: 'Arial', sans-serif;">Pilih Tanggal:</label>
         <input type="date" id="tanggal_pilihan" class="form-control" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
       </div>
       <div class="row">
@@ -27,8 +27,22 @@
                 <div class="discount-badge" style="margin-left: -15px;">50% OFF</div> <!-- Discount badge -->
               </div>
               <div class="card-body">
-                <h5 class="card-title"><?= $lapangan->nama_lapangan ?></h5>
-                <p>Jadwal Tersedia:</p>
+                <h3 class="card-title" style="font-family: 'Arial', sans-serif;"><strong><?= $lapangan->nama_lapangan ?></strong></h3>
+               <div style="display: flex; align-items: center; margin-bottom: 5px;">
+<div style="display: flex; align-items: center;  margin-right: 20px; font-family: 'Arial', sans-serif;">
+        <span>Jadwal Tersedia:</span>
+    </div>
+    <div style="display: flex; align-items: center; margin-right: 20px;">
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: blue; border-radius: 50%; margin-right: 5px;"></span>
+        <span>Tersedia</span>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: red; border-radius: 50%; margin-right: 5px;"></span>
+        <span>Tidak Tersedia</span>
+    </div>
+    
+</div>
+
                 <div class="jam-mulai" id="jam_mulai_<?= $lapangan->id_lapangan ?>">
                   <!-- Tempat untuk menampilkan jadwal mulai -->
                 </div>
@@ -88,14 +102,15 @@
 <!-- AJAX Script -->
 <script>
 $(document).ready(function() {
-    loadJamMulai(); // Load times for the initial date when the page loads
+    loadJamData(); // Load times for the initial date when the page loads
 
     $('#tanggal_pilihan').on('change', function() {
-        loadJamMulai(); // Reload times when the date is changed
+        loadJamData(); // Reload times when the date is changed
     });
 
-    function loadJamMulai() {
-        var url = "<?php echo base_url('cart/getJamMulai'); ?>";
+    function loadJamData() {
+        var urlAvailable = "<?php echo base_url('cart/getJamTersedia'); ?>";
+        var urlUsed = "<?php echo base_url('cart/getJamTerpakai'); ?>";
         var tanggal_pilihan = $('#tanggal_pilihan').val();
         
         $('.jam-mulai').each(function() {
@@ -103,7 +118,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: url,
+                url: urlAvailable,
                 data: {
                     tanggal: tanggal_pilihan,
                     lapangan_id: lapanganId
@@ -115,6 +130,7 @@ $(document).ready(function() {
                     var selectedDate = new Date(tanggal_pilihan);
                     var available = false; // Flag to check availability
                     
+                    // Menampilkan jam yang tersedia
                     $.each(data, function(index, value) {
                         var jam_mulai = value.jam_mulai;
                         var jam_mulai_parts = jam_mulai.split(':');
@@ -145,8 +161,28 @@ $(document).ready(function() {
                     if (!available) {
                         jamMulaiHtml = '<p><strong class="sold-out">Sold Out</strong></p>';
                     }
-                    
-                    $('#jam_mulai_' + lapanganId).html(jamMulaiHtml);
+
+                    // Menampilkan jam yang sudah digunakan
+                    $.ajax({
+                        type: "POST",
+                        url: urlUsed,
+                        data: {
+                            tanggal: tanggal_pilihan,
+                            lapangan_id: lapanganId
+                        },
+                        dataType: "json",
+                        success: function(usedData) {
+                            $.each(usedData, function(index, value) {
+                                jamMulaiHtml += '<span class="jam-used-item">' + value + '</span> ';
+                            });
+                            
+                            $('#jam_mulai_' + lapanganId).html(jamMulaiHtml);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("An error occurred: " + status + " - " + error);
+                            $('#jam_mulai_' + lapanganId).html('<p><strong class="sold-out">Untuk dapat melihat jadwal, silahkan login terlebih dahulu.</strong></p>');
+                        }
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error("An error occurred: " + status + " - " + error);
@@ -156,6 +192,7 @@ $(document).ready(function() {
         });
     }
 });
+
 </script>
 
 <!-- Style for Schedule Availability -->
@@ -164,10 +201,18 @@ $(document).ready(function() {
     display: inline-block;
     padding: 2px 4px;
     margin: 3px;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #f8f9fa;
-    color: #000;
+    background-color: #223C95;
+    color: #fff;
+}
+
+.jam-used-item {
+    display: inline-block;
+    padding: 2px 4px;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: #B22222;
+    color: #fff;
 }
 
 .sold-out {

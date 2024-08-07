@@ -9,8 +9,8 @@
         <img src="<?php echo base_url('assets/images/company/') . $company_data->foto . $company_data->foto_type ?>" alt="<?php echo $company_data->company_name ?>" style="width: 400px;">
     </div>    
 
-    <h4 style="text-align: center;">Nikmati pengalaman Sewa lapangan</h4>
-    <h4 style="text-align: center;">secara online dengan mudah dan cepat.</h4>
+    <h4 style="text-align: center; font-family: 'Arial', sans-serif;">Nikmati pengalaman Sewa lapangan</h4>
+    <h4 style="text-align: center; font-family: 'Arial', sans-serif;">secara online dengan mudah dan cepat.</h4>
     <br><br>
 
     <div style="text-align: center; margin-bottom: 50px;">
